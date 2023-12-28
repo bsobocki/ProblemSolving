@@ -20,7 +20,6 @@ std::string longestPalindrome(string str) {
         return end-beg-1;
     };
 
-
     for (int i = 0; i <= size/2; i++) {
         auto ind = mid+i;
         auto maxLocalPalindromeLen = std::max(getPalindromeSize(ind, ind),
