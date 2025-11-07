@@ -1,15 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <utils/utils.hpp>
 
 using namespace std;
-
-std::string setGreen = "\033[32m";
-std::string setRed = "\033[31m";
-std::string endColor = "\033[m";
-
-std::string getColoredResult(bool isPassed) {
-    return isPassed ? setGreen + "Passed" + endColor : setRed + "Failed" + endColor;
-}
 
 class Solution {
 public:
@@ -56,11 +49,15 @@ public:
 struct Test {
     string s;
     int numRows;
-    string result;
+    string expectedResult;
+
+    std::string getInfo() const {
+        return s + "(" + std::to_string(numRows) + ")";
+    }
 };
 
 void runSolution() {
-    std::vector<Test> tests = {
+    const std::vector<Test> tests = {
         {"PAYPALISHIRING", 1, "PAYPALISHIRING"},
         {"PAYPALISHIRING", 2, "PYAIHRNAPLSIIG"},
         {"PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"},
@@ -73,10 +70,11 @@ void runSolution() {
         {"PAYPALISHIRING", 10, "PAYPALGINSIHRI"},
         {"AB", 1, "AB"},
     };
+
     Solution sol;
-    std::cout << "Input | Expected | Output | Result" << endl;
+    std::cout << getResultInfoHeader() << endl;
     for (auto& test : tests) {
         string result = sol.convert(test.s, test.numRows);
-        cout << test.s << " | " << test.numRows << " | " << test.result << " | " << result << " | " << getColoredResult(result == test.result) << endl;
+        cout << getTestResultInfo<string>(test.getInfo(), test.expectedResult, result) << endl;
     }
 }

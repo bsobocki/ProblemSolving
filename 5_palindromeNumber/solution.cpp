@@ -1,5 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <utils/utils.hpp>
+#include <functional>
+
+using namespace std;
 
 bool isPalindromeVec(int x) {
     if (x < 0) return false;
@@ -50,6 +54,39 @@ bool isPalindromeRevHalf(int x) {
     return x == revX or x == revX/10;
 }
 
+struct Test {
+    int x;
+    bool expectedResult;
+    
+    string getInfo() const {
+        return to_string(x);
+    }
+};
+
 void runSolution() {
-    /* nothing.. for now! */
+    const vector<Test> tests = {
+        {121, true},
+        {-121, false},
+        {10, false},
+        {0, true},
+        {12321, true},
+        {123321, true},
+        {1234, false},
+        {1, true},
+        {99, true},
+        {1000021, false},
+    };
+
+    auto testSolution = [&](const std::string& title, std::function<bool(int)> isPalindrome) {
+        cout << "\n=== " << title << " SOLUTION ===" << endl;
+        cout << getResultInfoHeader() << endl;
+        for (auto& test : tests) {
+            bool result = isPalindrome(test.x);
+            cout << getTestResultInfo(test.getInfo(), test.expectedResult, result) << endl;
+        }
+    };
+
+    testSolution("VECTOR", isPalindromeVec);
+    testSolution("REVERSE FULL", isPalindromeRev);
+    testSolution("REVERSE HALF", isPalindromeRevHalf);
 }

@@ -3,12 +3,14 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <utils/utils.hpp>
+#include <functional>
 
 using namespace std;
 
 // O(N^2) - time complexity
 // O(1) - space complexity
-vector<int> twoSumbruteForce(vector<int>& nums, int target) {
+vector<int> twoSumbruteForce(const vector<int>& nums, int target) {
     for (int i = 0; i < nums.size(); i++)
         for (int j = 0; j < nums.size(); j++)
             if (i != j && nums[i] + nums[j] == target)
@@ -18,7 +20,7 @@ vector<int> twoSumbruteForce(vector<int>& nums, int target) {
 
 // O(N log_2 N) - time complexity - because of std::sort
 // O(N) - space complexity
-vector<int> twoSumVecSort(vector<int>& nums, int target) {
+vector<int> twoSumVecSort(const vector<int>& nums, int target) {
     std::vector<std::pair<int, int>> numsIdxs(nums.size());
 
     for(int i=0; i<nums.size(); i++) {
@@ -49,7 +51,7 @@ vector<int> twoSumVecSort(vector<int>& nums, int target) {
 // O(N log_2 N) - time complexity - because of std::sort
 // slower than vector
 // O(N) - space complexity
-vector<int> twoSumMultiMapSort(vector<int>& nums, int target) {
+vector<int> twoSumMultiMapSort(const vector<int>& nums, int target) {
     std::multimap<int, int> numsIdxs;
 
     for(int i=0; i<nums.size(); i++)
@@ -74,7 +76,7 @@ vector<int> twoSumMultiMapSort(vector<int>& nums, int target) {
 
 // O(N) - time complexity
 // more space than vector and multimap
-vector<int> twoSumHashMap(vector<int>& nums, int target) {
+vector<int> twoSumHashMap(const vector<int>& nums, int target) {
     std::unordered_map<int, int> checked;
 
     for (int i = 0; i < nums.size(); i++) {
@@ -87,14 +89,37 @@ vector<int> twoSumHashMap(vector<int>& nums, int target) {
     return {-1, -1};
 }
 
+struct Test {
+    vector<int> nums;
+    int target;
+    vector<int> expectedResult;
+};
+
 void runSolution() {
-    std::cout << "TODO: TESTS: " << std::endl;
+    const vector<Test> tests = {
+        {{2,7,11,15}, 9, {0,1}},
+        {{3,2,4}, 6, {1,2}},
+        {{3,3}, 6, {0,1}},
+        {{1,5,3,7,8,10}, 12, {1,3}},
+        {{-1,-2,-3,-4,-5}, -8, {2,4}},
+        {{0,4,3,0}, 0, {0,3}},
+        {{-3,4,3,90}, 0, {0,2}}
+    };
 
-    std::cout << "BRUTE FORCE SOLUTION:" << std::endl;
+    auto runTest = [&](const std::string& title, std::function<vector<int>(const vector<int>&, int)> twoSumSolution) {
+        std::cout << "\n=== " << title << " SOLUTION ===" << std::endl;
+        std::cout << getResultInfoHeader() << std::endl;
+        for (auto& test : tests) {
+            vector<int> result = twoSumSolution(test.nums, test.target);
+            std::sort(result.begin(), result.end());
+            auto expected = test.expectedResult;
+            std::sort(expected.begin(), expected.end());
+            cout << getTestResultInfo(to_string(test.nums) + " target:" + to_string(test.target), expected, result) << endl;
+        }
+    };
 
-    std::cout << "SORT VECTOR SOLUTION: " << std::endl;
-
-    std::cout << "SORT MULTIMAP SOLUTION: " << std::endl;
-
-    std::cout << "HASHMAP SOLUTION: " << std::endl;
+    runTest("BRUTE FORCE", twoSumbruteForce);
+    runTest("SORT VECTOR", twoSumVecSort);
+    runTest("SORT MULTIMAP", twoSumMultiMapSort);
+    runTest("HASHMAP", twoSumHashMap);
 }

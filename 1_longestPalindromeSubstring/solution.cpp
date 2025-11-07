@@ -1,5 +1,5 @@
 #include <iostream>
-#include <to_string.hpp>
+#include <utils/utils.hpp>
 #include <map>
 #include <vector>
 
@@ -43,21 +43,42 @@ std::string longestPalindrome(string str) {
     return str.substr(maxBeg, maxLen);
 }
 
-std::map<std::string, std::vector<std::string>> tests = {
-    {"kbaaabr", {"baaab"}},
-    {"babad", {"bab", "aba"}},
-    {"cbffbd", {"bffb"}},
-    {"babca", {"bab"}},
-    {"aacabdkacaa", {"aca"}},
-    {"bb", {"bb"}},
-    {"aaaa", {"aaaa"}},
-    {"", {""}},
-    {"habcdeedcbagj", {"abcdeedcba"}}
+struct Test {
+    string str;
+    vector<string> validResults;
+    
+    string getInfo() const {
+        return str;
+    }
 };
 
 void runSolution() {
+    const vector<Test> tests = {
+        {"kbaaabr", {"baaab"}},
+        {"babad", {"bab", "aba"}},
+        {"cbffbd", {"bffb"}},
+        {"babca", {"bab"}},
+        {"aacabdkacaa", {"aca"}},
+        {"bb", {"bb"}},
+        {"aaaa", {"aaaa"}},
+        {"", {""}},
+        {"habcdeedcbagj", {"abcdeedcba"}},
+        {"a", {"a"}},
+        {"ac", {"a", "c"}},
+        {"racecar", {"racecar"}},
+        {"abcdef", {"a", "b", "c", "d", "e", "f"}},
+        {"noon", {"noon"}},
+        {"civic", {"civic"}},
+        {"abacabad", {"abacaba"}},
+        {"forgeeksskeegfor", {"geeksskeeg"}},
+        {"abcddcba", {"abcddcba"}}
+    };
+
+    std::cout << getResultInfoHeader() << std::endl;
     for (auto& test : tests) {
-        std::cout << "[str: \"" << test.first << "\"] : [answer:\"" << longestPalindrome(test.first) << "\"] : [valid results: " << to_string(test.second) << "]" << std::endl;
+        string result = longestPalindrome(test.str);
+        cout << getTestResultInfo(test.getInfo(), test.validResults, result) << endl;
     }
 }
+
 
