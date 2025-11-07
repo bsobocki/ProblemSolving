@@ -1,5 +1,9 @@
 # Problem Solving - C++ Solutions
 
+![C++](https://img.shields.io/badge/C++-17-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos-lightgrey.svg)
+
 A comprehensive collection of algorithmic problem solutions implemented in C++, featuring multiple approaches, complexity analysis, and extensive test coverage.
 
 ## Table of Contents
@@ -49,6 +53,14 @@ ProblemSolving/
 - C++ compiler with C++17 support (g++, clang++)
 - Make build system
 - Python 3.x (for automated testing)
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/bsobocki/ProblemSolving.git
+cd ProblemSolving
+```
 
 ### Building
 
