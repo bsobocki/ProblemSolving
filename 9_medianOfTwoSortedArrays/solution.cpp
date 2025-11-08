@@ -114,6 +114,18 @@ double findMedianSortedArrays_HalfOfMergedArray(vector<int>& nums1, vector<int>&
     return median;
 }
 
+struct Test {
+    vector<int> nums1;
+    vector<int> nums2;
+    double expectedResult;
+
+    string getInfo() {
+        stringstream ss;
+        ss << nums1 << " + " << nums2 << " => " << mergedArrays(nums1, nums2);
+        return ss.str();
+    }
+};
+
 vector<int> generateRandomSortedVector(size_t size) {
     if (size == 0) return {};
 
@@ -134,18 +146,6 @@ vector<int> generateRandomSortedVector(size_t size) {
 
     return vec;
 }
-
-struct Test {
-    vector<int> nums1;
-    vector<int> nums2;
-    double expectedResult;
-
-    string getInfo() {
-        stringstream ss;
-        ss << nums1 << " + " << nums2 << " => " << mergedArrays(nums1, nums2);
-        return ss.str();
-    }
-};
 
 void runSolution() {
     const vector<Test> tests = {
@@ -214,7 +214,11 @@ void runSolution() {
         double medianWholeArr = findMedianWholeSortedArrays_WholeMergedArray(test.nums1, test.nums2);
         double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(test.nums1, test.nums2);
         bool result = medianWholeArr == medianHalfArr && medianHalfArr == test.expectedResult;
-        cout << "\ninfo: "  << test.getInfo() << ",\nmedian whole: " << medianWholeArr << ",\nmedian half: " << medianHalfArr << ",\nexpected: " << test.expectedResult << ",\nresult: " << getColoredResult(result) << "\n" << endl;
+        cout << "\ninfo: "  << test.getInfo() << "," << endl;
+        cout << "median whole: " << medianWholeArr << "," << endl;
+        cout << "median half: " << medianHalfArr << "," << endl;
+        cout << "expected: " << test.expectedResult << "," << endl;
+        cout << "result: " << getColoredResult(result) << endl << endl;
     }
 
     cout << "\n----- RANDOM TESTS - CHECK IF RESULTS THE SAME AS FOR TRIVIAL SOLUTION ----\n" << endl;
@@ -238,7 +242,9 @@ void runSolution() {
         double medianWholeArr = findMedianWholeSortedArrays_WholeMergedArray(nums1, nums2);
         double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(nums1, nums2);
 
-        cout << "\n" << "size1: " << size1 << ",\nsize2: " << size2 << ",\nmedianWholeArr: " << medianWholeArr << ",\nmedianHalfArr: " << medianHalfArr << ",\nresult: " << getColoredResult(medianWholeArr==medianHalfArr) << "\n" << endl;
+        cout << "\n" << "size1: " << size1 << ",\nsize2: " << size2;
+        cout << ",\nmedianWholeArr: " << medianWholeArr << ",\nmedianHalfArr: " << medianHalfArr;
+        cout << ",\nresult: " << getColoredResult(medianWholeArr==medianHalfArr) << endl << endl;
     }
 
 }
