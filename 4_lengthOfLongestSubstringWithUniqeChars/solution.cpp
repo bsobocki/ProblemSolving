@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// O(n) - time complexity
+// O(n) - space complexity
 int lengthOfLongestSubstring(string s) {
     int start = 0;
     int maxSize = 0;

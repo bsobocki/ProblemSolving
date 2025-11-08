@@ -4,6 +4,9 @@
 
 using namespace std;
 
+// O(S) - time complexity
+// O(1) - space complexity
+// where S = sum of all characters in all strings
 string longestCommonPrefix(vector<string>& strs) {
     if (strs.empty()) return "";
     for (auto& str : strs)

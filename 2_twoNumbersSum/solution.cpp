@@ -10,7 +10,7 @@ using namespace std;
 
 // O(N^2) - time complexity
 // O(1) - space complexity
-vector<int> twoSumbruteForce(const vector<int>& nums, int target) {
+vector<int> twoSumBruteForce(const vector<int>& nums, int target) {
     for (int i = 0; i < nums.size(); i++)
         for (int j = 0; j < nums.size(); j++)
             if (i != j && nums[i] + nums[j] == target)
@@ -118,7 +118,7 @@ void runSolution() {
         }
     };
 
-    runTest("BRUTE FORCE", twoSumbruteForce);
+    runTest("BRUTE FORCE", twoSumBruteForce);
     runTest("SORT VECTOR", twoSumVecSort);
     runTest("SORT MULTIMAP", twoSumMultiMapSort);
     runTest("HASHMAP", twoSumHashMap);

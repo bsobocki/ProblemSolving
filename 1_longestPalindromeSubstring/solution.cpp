@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// O(n²) - time complexity
+// O(1)  - space complexity
 std::string longestPalindrome(string str) {
     auto size = str.size();
     if (size < 2) return str;

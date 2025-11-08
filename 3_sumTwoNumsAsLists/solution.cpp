@@ -15,6 +15,8 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+// O(max(m,n))  - time complexity
+// O(max(m,n))  - space complexity
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     if (l1->val == 0 && !l1->next) return l2;
     if (l2->val == 0 && !l2->next) return l1;

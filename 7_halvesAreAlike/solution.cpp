@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// O(n) - time complexity
+// O(1) - space complexity
 bool halvesAreAlike(string s) {
     int countPart1 = 0;
     int countPart2 = 0;

@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// O(log_10 n) - time & space complexity
 bool isPalindromeVec(int x) {
     if (x < 0) return false;
 
@@ -22,6 +23,8 @@ bool isPalindromeVec(int x) {
 }
 
 // reverse the whole X
+// O(log_10 n) - time complexity
+// O(1)        - space complexity
 bool isPalindromeRev(int x) {
     if (x < 0) return false;
     int tempX = x;
@@ -41,6 +44,8 @@ bool isPalindromeRev(int x) {
 // reverse only the half of the X number
 // this is not my idea, but it is a little bit faster :D
 // so i wanted to add it
+// O(log_10 n) - time complexity
+// O(1)        - space complexity
 bool isPalindromeRevHalf(int x) {
     // the algorithm won't work for 10*k
     if (x < 0 or (x and x % 10 == 0)) return false;

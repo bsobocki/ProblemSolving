@@ -6,6 +6,8 @@ using namespace std;
 
 class Solution {
 public:
+    // O(n) - time complexity
+    // O(n) - space complexity
     string convert(string s, int numRows) {
         if (numRows == 1 || s.length() == 0 || numRows >= s.length()) return s;
 
