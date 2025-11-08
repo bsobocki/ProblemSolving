@@ -209,7 +209,7 @@ Convert a string to zigzag pattern and read line by line.
 - **Approach:** Mathematical pattern recognition
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(n)
-- Includes detailed [explanation](ProblemSolving/8_zigzagConversion/explanation.md)
+- Includes detailed [explanation](8_zigzagConversion/explanation.md)
 
 
 ## Complexity Analysis
@@ -266,3 +266,4 @@ Solutions are implemented with a focus on:
 - Code readability
 - Performance optimization
 - Best practices in C++ programming
+
