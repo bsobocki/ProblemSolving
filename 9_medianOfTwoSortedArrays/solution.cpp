@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <utils/utils.hpp>
+#include <random>
 
 using namespace std;
 
@@ -113,10 +114,37 @@ double findMedianSortedArrays_HalfOfMergedArray(vector<int>& nums1, vector<int>&
     return median;
 }
 
+vector<int> generateRandomSortedVector(size_t size) {
+    if (size == 0) return {};
+
+    vector<int> vec;
+    vec.reserve(size);
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<int> dist(1,100);
+
+    int current = dist(gen);
+    vec.push_back(current);
+
+    for (size_t i = 1; i < size; i++) {
+        current += dist(gen);
+        vec.push_back(current);
+    }
+
+    return vec;
+}
+
 struct Test {
     vector<int> nums1;
     vector<int> nums2;
     double expectedResult;
+
+    string getInfo() {
+        stringstream ss;
+        ss << nums1 << " + " << nums2 << " => " << mergedArrays(nums1, nums2);
+        return ss.str();
+    }
 };
 
 void runSolution() {
@@ -135,7 +163,7 @@ void runSolution() {
         {{2}, {1}, 1.5},
         
         // Different sizes
-        {{1,2,3}, {4,5,6,7,8}, 5.0},
+        {{1,2,3}, {4,5,6,7,8}, 4.5},
         {{1}, {2,3,4,5,6}, 3.5},
         
         // All elements in nums1 < all in nums2
@@ -156,13 +184,13 @@ void runSolution() {
         {{1,1,3,3}, {1,1,3,3}, 2.0},
         
         // Negative numbers
-        {{-5,-3,-1}, {0,2,4}, 0.5},
+        {{-5,-3,-1}, {0,2,4}, -0.5},
         {{-10,-5,0}, {5,10}, 0.0},
         {{-2,-1}, {3}, -1.0},
         
         // Large difference in sizes
-        {{1}, {2,3,4,5,6,7,8,9,10}, 6.0},
-        {{1,2,3,4,5,6,7,8,9}, {10}, 6.0},
+        {{1}, {2,3,4,5,6,7,8,9,10}, 5.5},
+        {{1,2,3,4,5,6,7,8,9}, {10}, 5.5},
         
         // Same arrays
         {{1,2,3}, {1,2,3}, 2.0},
@@ -185,6 +213,32 @@ void runSolution() {
     for (auto test : tests) {
         double medianWholeArr = findMedianWholeSortedArrays_WholeMergedArray(test.nums1, test.nums2);
         double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(test.nums1, test.nums2);
-        cout << "Nums1: " << test.nums1 << " | Nums2: " << test.nums2 << " | Merged: " << mergedArrays(test.nums1, test.nums2) << " | median whole: " << medianWholeArr << " | median half: " << medianHalfArr << " | expected median: " << test.expectedResult << endl;
+        bool result = medianWholeArr == medianHalfArr && medianHalfArr == test.expectedResult;
+        cout << "\ninfo: "  << test.getInfo() << ",\nmedian whole: " << medianWholeArr << ",\nmedian half: " << medianHalfArr << ",\nexpected: " << test.expectedResult << ",\nresult: " << getColoredResult(result) << "\n" << endl;
     }
+
+    cout << "\n----- RANDOM TESTS - CHECK IF RESULTS THE SAME AS FOR TRIVIAL SOLUTION ----\n" << endl;
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<int> dist_0_100(0, 100);
+    uniform_int_distribution<int> dist_1_100(1, 100);
+
+    constexpr size_t RANDOM_TESTS_NUM = 10;
+    for (size_t i = 1; i <= RANDOM_TESTS_NUM; i++) {
+        int size1 = dist_0_100(gen);
+        int size2 = dist_0_100(gen);
+
+        if (size1 == 0 && size2 == 0)
+            size1 = dist_1_100(gen);
+        
+        vector<int> nums1 = generateRandomSortedVector(size1);
+        vector<int> nums2 = generateRandomSortedVector(size2);
+
+        double medianWholeArr = findMedianWholeSortedArrays_WholeMergedArray(nums1, nums2);
+        double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(nums1, nums2);
+
+        cout << "\n" << "size1: " << size1 << ",\nsize2: " << size2 << ",\nmedianWholeArr: " << medianWholeArr << ",\nmedianHalfArr: " << medianHalfArr << ",\nresult: " << getColoredResult(medianWholeArr==medianHalfArr) << "\n" << endl;
+    }
+
 }
