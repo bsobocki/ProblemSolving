@@ -54,6 +54,14 @@ std::string getColoredResult(bool isPassed) {
     return (isPassed ? setGreen + "Passed" : setRed + "Failed") + endColor;
 }
 
+std::string greenStr(const std::string& str) {
+    return setGreen + str + endColor;
+}
+
+std::string redStr(const std::string& str) {
+    return setRed + str + endColor;
+}
+
 std::string getResultInfoHeader() {
     return "| TEST | EXPECTED | OUTPUT | RESULT |\n|-----------------------------------|";
 }
