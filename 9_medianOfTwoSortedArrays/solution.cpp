@@ -9,150 +9,65 @@ using namespace std;
 constexpr int inf = std::numeric_limits<int>::max();
 constexpr int _inf  = std::numeric_limits<int>::min();
 
-// every division will have indexes l,m,r that points current left end, right end and the middle
-// {1, 2, 3, 4, 5, 6}
-//  ^l    ^m       ^r
-// for each BinSearch step
-// {1, 2, 3, 4, 5, 6}
-//           ^l ^m ^r
-// etc.
-struct Partition {
-    int maxLeftIndex = 0;
-    int minRightIndex = 0;
-    int midIndex = 0;
-    vector<int>& vec;
+double findMedianSortedArraysBinSearch(vector<int>& nums1, vector<int>& nums2) {
+    // we want nums1 to be the shorter vector
+    if (nums1.size() > nums2.size())
+        return findMedianSortedArraysBinSearch(nums2, nums1);
 
-    Partition(vector<int>& v): vec(v)  {
-        minRightIndex = vec.size()-1;
-        midIndex = (maxLeftIndex + minRightIndex) / 2;
-    }
+    const size_t n = nums1.size();
+    const size_t m = nums2.size();
 
-    void recalcMidIndex() {
-        if (maxLeftIndex == -1 || minRightIndex == -1)
-            midIndex = -1;
-        else
-            midIndex = (maxLeftIndex + minRightIndex ) / 2;
-    }
+    // we will divide elements into two partitions (smaller half "left" and bigger half "right")
+    // the median is the biggest element from smaller "left" partition if total size is odd
+    // or it is an average from the biggest element from the smaller partition
+    // and smallest element from the bigger one
 
-    int maxLeft() {
-        // for max(part1.maxLeft, part2.maxLeft) -- if midIndex == vec.size() then we don't have maxLeft here
-        if (midIndex == -1 || midIndex == vec.size()) return _inf;
-        // if maxLeft exists it is located at midIndex cell
-        return vec[midIndex];
-    }
-
-    int minRight() {
-        // if our left part doesn't exists then min elem from right part
-        // is the first element
-        if (midIndex == -1) return vec[0];
-        // if right part doesn't exists then return +infinity for comparison
-        if (midIndex >= vec.size()-1) return inf;
-        // otherwise return just the element on the right of maxLeft element
-        return vec[midIndex+1];
-    }
-
-    // if current partition is wrong and we want to go right
-    // then we move our left index outside our current left part
-    // so midIndex + 1
-    void moveItRight() {
-        maxLeftIndex = midIndex + 1;
-        recalcMidIndex();
-    }
-
-    // if current partition is wrong and we want to go left
-    // then we move our right index outside our current right part
-    // so midIndex - 1
-    void moveItLeft() {
-        minRightIndex = midIndex - 1;
-        recalcMidIndex();
-    }
-
-    size_t leftPartSize() {
-        return midIndex + 1;
-    }
-
-    string getInfo() {
-        stringstream ss;
-        ss << "maxLeftIndex: " << maxLeftIndex << " | minRightIndex: " << minRightIndex << " | midIndex: " << midIndex;
-        return ss.str();
-    }
-};
-
-double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-    // if one of vectors is empty then we just return the median of the second one
-    auto getMedianFromArray = [](vector<int>& nums) -> double {
-        size_t size = nums.size();
-        size_t leftPartSize = size/2;
-        size_t leftMaxIdx = leftPartSize-1;
-        size_t rightMinIdx = leftPartSize;
-        if (size % 2 == 0) {
-            int leftMidElem = nums[leftMaxIdx];
-            int rightMidElem = nums[rightMinIdx];
-            return (leftMidElem + rightMidElem) / 2.0;
-        }
-        return nums[size/2];
-    };
-
-    if (nums1.size() == 0) return getMedianFromArray(nums2);
-    if (nums2.size() == 0) return getMedianFromArray(nums1);
-
-
-    const size_t totalSize = nums1.size() + nums2.size();
-    const bool isTotalSizeEven = totalSize % 2 == 0;
-    // for even totalSize N we will make (N+1)/2 so it is the same as N/2
-    // for odd totalSize N we want to have median in the left part, so we will do (N+1)/2
+    // in our smaller partition ((n+m)/2 smallest elements) we want to include median, so
+    // for even totalSize N we will make (N+1)/2 so it is the same as N/2 (one of two middle values for median covered)
+    // for odd totalSize N we want to have median in the smaller part, so we will do (N+1)/2
     // to include it (take a ceil from the division)
-    const size_t totalLeftPartSize = (totalSize+1)/2;
+    const size_t partitionSize = (n + m + 1) / 2;
 
-    // we will divide those vectors into two partitions "left" and "right"
-    // and we are trying to achive the state where left parts of both vectors
-    // created the "smaller half" of all elements from both vectors (N/2 smallest elements)
-    // where N = n + m
+    // we will consider partitioning based on nums1 (shorter vector)
+    // because we will process binary search on it to find correct partitions
+    // so we will initialize this partitioning position on nums1 edge elements and we will move them to the left or right
+    // only for this vector and adjust the second partitioning (for nums2) based on this one
+    int left = 0;
+    int right = nums1.size();
 
-    // part1 must have the smallest size because we will do BinSearch on it to minimize number of operations
-    Partition part1 = (nums1.size() <= nums2.size()) ? Partition(nums1) : Partition(nums2);
-    Partition part2 = (nums1.size() <= nums2.size()) ? Partition(nums2) : Partition(nums1);
-
-    // we will initially divide both vectors in half for left-right partitioning and check if they are correct
-    // it means for each vector that the maximum elements from left partition have to be smaller than minimum element of both right partitions
+    // Binary search finds the valid partition (guaranteed to exist in sorted arrays)
+    // - If partition1's left has elements too large → move left (shift elements to partition2)
+    // - If partition2's left has elements too large → move right (take more from partition1)
     while(true) {
-        part2.midIndex = totalLeftPartSize - part1.leftPartSize() - 1; // -1 because it is index
+        // partition represents the number of elements taken from each array for the left half
+        const int partition1 = (left + right) / 2;
+        const int partition2 = partitionSize - partition1 ;
+        
+        // use -inf and +inf for compariosns when there is no leftMax or minRight in one of partitions
+        const int maxLeft1 = partition1 == 0 ? _inf : nums1[partition1 -1];
+        const int minRight1 = partition1 == n ? inf : nums1[partition1];
+        const int maxLeft2 = partition2 == 0 ? _inf : nums2[partition2 - 1];
+        const int minRight2 = partition2 == m ? inf : nums2[partition2];
 
-        // check if max left element from vector 1 is smaller than min right from vector 2
-        // note that we don't need to check max left and min right in the same vector because vectors are ordered 
-        if (part1.maxLeft() <= part2.minRight()) {
-            // the same check but max left from vector 2 and min right from vector 1
-            if (part2.maxLeft() <= part1.minRight()) {
-                // our current max left element of vector combined from vector 1 and vector 2
-                // is maximum from their max left elements
-                int maxLeft = max(part1.maxLeft(), part2.maxLeft());
-                if (isTotalSizeEven) {
-                    // if size is even then the median is average from two middle elements
-                    // so we calculate min right of combined vector similarly
-                    int minRight = min(part1.minRight(), part2.minRight());
-                    return (maxLeft + minRight) / 2.0;
-                }
-                return maxLeft;
+        if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+            // if we found correct partitions then we will return max left element
+            // if n+m is odd or an average of max left and min right
+            if ((n + m) % 2 == 0) {
+                return (max(maxLeft1, maxLeft2) + min(minRight1, minRight2)) / 2.0;
             }
-            else {
-                // if max left of vector 1 is smaller than min right of vector 2
-                // but it is not the same on the other side, then we need to move our left part
-                // from vector 1 to add bigger elements
-                // note that at the next iteration we will recalculate midIndex for vector 2
-                // because we need to have N/2 elements in left parts
-                part1.moveItRight();
-            }
+            return max(maxLeft1, maxLeft2);
+        }
+        else if (maxLeft1 > minRight2) {
+            // our smaller partition have bigger elements, so we need to move it left
+            right = partition1 - 1;
         }
         else {
-            // if max left of vector 1 is not smaller than min right of vector 2 that means
-            // that our elements from the left part are too big, because in the right part
-            // there are some elements that are smaller
-            // in that case we need to move our left part to left
-            part1.moveItLeft();
+            // our right partition have smaller elements, so we need to move it right
+            left = partition1 + 1;
         }
     }
 
-    return 0.0;
+    return 0.0; // unreachable - satisfies compiler
 }
 
 vector<int> mergedArrays(vector<int>& nums1, vector<int>& nums2) {
@@ -359,12 +274,12 @@ void runSolution() {
 
     vector<int> vec1 = {};
     vector<int> vec2 = {2,3};
-    cout << "findMedianSortedArrays: " << findMedianSortedArrays(vec1, vec2) << " | vec1: " << vec1 << " | vec2: " << vec2 << endl;
+    cout << "findMedianSortedArrays: " << findMedianSortedArraysBinSearch(vec1, vec2) << " | vec1: " << vec1 << " | vec2: " << vec2 << endl;
 
     for (auto test : tests) {
         double medianWholeArr = findMedianWholeSortedArrays_WholeMergedArray(test.nums1, test.nums2);
         double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(test.nums1, test.nums2);
-        double medianBinSearch = findMedianSortedArrays(test.nums1, test.nums2);
+        double medianBinSearch = findMedianSortedArraysBinSearch(test.nums1, test.nums2);
         bool result = medianWholeArr == medianHalfArr && medianHalfArr == test.expectedResult && medianBinSearch == test.expectedResult;
         cout << "\ninfo: "  << test.getInfo() << "," << endl;
         cout << "median whole: " << medianWholeArr << "," << endl;
@@ -394,7 +309,7 @@ void runSolution() {
 
         double medianWholeArr = findMedianWholeSortedArrays_WholeMergedArray(nums1, nums2);
         double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(nums1, nums2);
-        double medianBinSearch = findMedianSortedArrays(nums1, nums2);
+        double medianBinSearch = findMedianSortedArraysBinSearch(nums1, nums2);
 
         cout << "\n" << "size1: " << size1 << ",\nsize2: " << size2;
         cout << ",\nmedianWholeArr: " << medianWholeArr << ",\nmedianHalfArr: " << medianHalfArr << ",\nmedianBinSearch: " << medianBinSearch;
