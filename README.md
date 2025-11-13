@@ -240,13 +240,17 @@ auto result = getTestResultInfo("Test case", expected, actual);
 
 Contributions are welcome! To add a new solution:
 
-1. Create a new directory with format: `<number>_<problemName>/`
+1. Create a new directory with format: `<number>_<problemName>/` using
+    ```bash
+    ./create_solution.sh <your_solution_name>
+    ```
+    It will create a new solution directory with the highest number and `solution.cpp` template.
 2. Add `description.md` with problem statement
 3. Implement solution in `solution.cpp` with:
    - The solution function
    - Test cases
    - `runSolution()` function
-4. Include complexity analysis in comments
+4. Include complexity analysis in comments or `description.md`
 5. Ensure all tests pass
 
 ## License
