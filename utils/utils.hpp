@@ -69,6 +69,12 @@ std::string getResultInfoHeader() {
 }
 
 template<typename T>
+std::string getTestResultInfo(const std::string& testInfo, T result, bool passed) {
+    std::stringstream ss;
+    ss << "| " << testInfo << " | | " << result << " | " << getColoredResult(passed) << " |" ;
+    return ss.str();
+}
+template<typename T>
 std::string getTestResultInfo(const std::string& testInfo, T expected, T result) {
     std::stringstream ss;
     ss << "| " << testInfo << " | " << expected << " | " << result << " | " << getColoredResult(expected == result) << " |" ;
