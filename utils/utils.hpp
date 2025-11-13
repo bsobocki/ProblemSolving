@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <functional>
+#include <format>
 
 template<typename Container>
 std::string to_string(const Container& cont) {
@@ -74,13 +76,25 @@ std::string getTestResultInfo(const std::string& testInfo, T expected, T result)
 }
 
 template<typename T>
-std::string getTestResultInfo(const std::string& testInfo, const std::vector<T> expected, T result) {
+std::string getTestResultInfo(const std::string& testInfo, const std::vector<T> possibleResults, T result) {
     bool passed = false;
-    for(auto res : expected) {
+    for(auto res : possibleResults) {
         if (res == result)
             passed = true;
     }
     std::stringstream ss;
-    ss << "| " << testInfo << " | " << expected << " | " << result << " | " << getColoredResult(passed) << " |" ;
+    ss << "| " << testInfo << " | " << possibleResults << " | " << result << " | " << getColoredResult(passed) << " |" ;
     return ss.str();
+}
+
+template<typename TestType, typename TestFunc>
+void runTests(const std::vector<TestType>& tests, TestFunc runTest) {
+    std::cout << getResultInfoHeader() << std::endl;
+
+    const size_t passedCount = std::count_if(tests.begin(), tests.end(), runTest);
+    
+    if (passedCount == tests.size())
+        std::cout << std::endl << greenStr("✓ ALL TESTS PASSED!") << std::endl;
+    else
+        std::cout << std::endl << redStr(std::format("✗ {}/{} TESTS FAILED!", tests.size()-passedCount, tests.size())) << std::endl; 
 }

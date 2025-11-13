@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -pedantic
+CXXFLAGS = -Wall -Wextra -pedantic -std=c++20
 INCLUDE = -I.
 TARGET=$(word 2, $(MAKECMDGOALS))
 OUTPUTDIR=bin/${TARGET}

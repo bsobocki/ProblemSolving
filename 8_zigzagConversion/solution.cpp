@@ -4,49 +4,46 @@
 
 using namespace std;
 
-class Solution {
-public:
-    // O(n) - time complexity
-    // O(n) - space complexity
-    string convert(string s, int numRows) {
-        if (numRows == 1 || s.length() == 0 || numRows >= s.length()) return s;
+// O(n) - time complexity
+// O(n) - space complexity
+string convert(string s, int numRows) {
+    if (numRows == 1 || s.length() == 0 || numRows >= s.length()) return s;
 
-        string result;
+    string result;
 
-        // we are going through all rows by taking numRows-1 steps twice (up and down) 
-        int initStep = (numRows - 1) * 2;
+    // we are going through all rows by taking numRows-1 steps twice (up and down) 
+    int initStep = (numRows - 1) * 2;
 
-        // for the first [0] row
-        for (int i = 0; i < s.length(); i += initStep)
+    // for the first [0] row
+    for (int i = 0; i < s.length(); i += initStep)
+        result += s[i];
+
+    // even steps are different than odd steps (expect the middle row when numRows is odd)
+    int evenStep = 2; // for second row we make 2 steps to the next letter
+    int oddStep = initStep-2; // for second row we will make less steps by 2 than initStep number
+
+    // for steps inside
+    for (int currRowNum = 1; currRowNum < numRows-1; currRowNum++) {
+        bool isOddStep = true;
+        int i = currRowNum;
+        while (i < s.length()) {
             result += s[i];
- 
-        // even steps are different than odd steps (expect the middle row when numRows is odd)
-        int evenStep = 2; // for second row we make 2 steps to the next letter
-        int oddStep = initStep-2; // for second row we will make less steps by 2 than initStep number
 
-        // for steps inside
-        for (int currRowNum = 1; currRowNum < numRows-1; currRowNum++) {
-            bool isOddStep = true;
-            int i = currRowNum;
-            while (i < s.length()) {
-                result += s[i];
-
-                if (isOddStep) i += oddStep;
-                else i += evenStep;
-                isOddStep = !isOddStep;
-            }
-            // with each row we are lower, so odd steps will be shorter by 2 and even steps will be longer by 2
-            oddStep -= 2;
-            evenStep += 2;
+            if (isOddStep) i += oddStep;
+            else i += evenStep;
+            isOddStep = !isOddStep;
         }
-
-        // for the last [numRows-1] row
-        for (int i = numRows-1; i < s.length(); i += initStep)
-            result += s[i];
-
-        return result;
+        // with each row we are lower, so odd steps will be shorter by 2 and even steps will be longer by 2
+        oddStep -= 2;
+        evenStep += 2;
     }
-};
+
+    // for the last [numRows-1] row
+    for (int i = numRows-1; i < s.length(); i += initStep)
+        result += s[i];
+
+    return result;
+}
 
 struct Test {
     string s;
@@ -73,10 +70,9 @@ void runSolution() {
         {"AB", 1, "AB"},
     };
 
-    Solution sol;
-    std::cout << getResultInfoHeader() << endl;
-    for (auto& test : tests) {
-        string result = sol.convert(test.s, test.numRows);
+    runTests(tests, [](const Test& test) {
+        string result = convert(test.s, test.numRows);
         cout << getTestResultInfo<string>(test.getInfo(), test.expectedResult, result) << endl;
-    }
+        return test.expectedResult == result;
+    });
 }

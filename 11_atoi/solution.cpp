@@ -49,12 +49,10 @@ struct Test {
     std::string s;
     int expectedResult;
 
-    std::string getInfo() {
+    std::string getInfo() const {
         return "s: " + s;
     }
 };
-
-
 
 void runSolution() {
 
@@ -185,16 +183,9 @@ void runSolution() {
         {"+7", 7}
     };
 
-    std::cout << getResultInfoHeader() << std::endl;
-    size_t passedCout = 0;
-    for (auto test: tests) {
+    runTests(tests, [](const Test& test) {
         int integer = myAtoi(test.s);
         std::cout << getTestResultInfo(test.getInfo(), test.expectedResult, integer) << std::endl;
-
-        if (integer == test.expectedResult) passedCout++;
-    }
-
-    if (passedCout == tests.size()) {
-        std::cout << greenStr("✓ ALL TESTS PASSED!") << endl;
-    }
+        return integer == test.expectedResult;
+    });
 }

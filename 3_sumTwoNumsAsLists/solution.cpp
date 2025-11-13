@@ -98,8 +98,7 @@ void runSolution() {
         {{5}, {5}, {0,1}},                  // 5 + 5 = 10
     };
 
-    cout << getResultInfoHeader() << endl;
-    for (auto& test : tests) {
+    runTests(tests, [](const Test& test) {
         ListNode* l1 = createList(test.l1);
         ListNode* l2 = createList(test.l2);
         ListNode* result = addTwoNumbers(l1, l2);
@@ -111,5 +110,7 @@ void runSolution() {
             deleteList(result);
         deleteList(l1);
         deleteList(l2);
-    }
+
+        return test.expectedResult == resultVec;
+    });
 }

@@ -53,10 +53,10 @@ void runSolution() {
         {{"cir","car"}, "c"}
     };
 
-    std::cout << getResultInfoHeader() << std::endl;
-    for (auto& test : tests) {
+    runTests(tests, [](const Test& test) {
         auto strs = test.strs;
         string result = longestCommonPrefix(strs);
         cout << getTestResultInfo(to_string(test.strs), test.expectedResult, result) << endl;
-    }
+        return test.expectedResult == result;
+    });
 }

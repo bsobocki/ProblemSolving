@@ -108,14 +108,14 @@ void runSolution() {
 
     auto runTest = [&](const std::string& title, std::function<vector<int>(const vector<int>&, int)> twoSumSolution) {
         std::cout << "\n=== " << title << " SOLUTION ===" << std::endl;
-        std::cout << getResultInfoHeader() << std::endl;
-        for (auto& test : tests) {
+        runTests(tests, [&](const Test& test) {
             vector<int> result = twoSumSolution(test.nums, test.target);
             std::sort(result.begin(), result.end());
             auto expected = test.expectedResult;
             std::sort(expected.begin(), expected.end());
             cout << getTestResultInfo(to_string(test.nums) + " target:" + to_string(test.target), expected, result) << endl;
-        }
+            return expected == result;
+        });
     };
 
     runTest("BRUTE FORCE", twoSumBruteForce);

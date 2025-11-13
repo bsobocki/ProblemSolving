@@ -44,9 +44,9 @@ void runSolution() {
         {"tkPAllotts", true},
     };
 
-    std::cout << getResultInfoHeader() << endl;
-    for (auto& test : tests) {
+    runTests(tests, [](const Test& test) {
         bool result = halvesAreAlike(test.s);
         cout << getTestResultInfo(test.s, test.expectedResult, result) << endl;
-    }
+        return test.expectedResult == result;
+    });
 }

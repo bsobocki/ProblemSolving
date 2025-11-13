@@ -27,7 +27,7 @@ struct Test {
     int x;
     int expectedResult;
 
-    std::string getInfo() {
+    std::string getInfo() const {
         return "x: " + std::to_string(x);
     }
 };
@@ -111,13 +111,11 @@ void runSolution() {
         {-2000000000, -2},           // reversed: -2
     };
 
-    reverse(1534236469);
-
-    std::cout << getResultInfoHeader() << std::endl;
-    for (auto test: tests) {
+    runTests(tests, [](const Test& test) {
         int reversed = reverse(test.x);
         std::cout << getTestResultInfo(test.getInfo(), test.expectedResult, reversed) << std::endl;
-    }
+        return reversed == test.expectedResult;
+    });
 
     std::random_device rd;
     std::mt19937 gen(rd());

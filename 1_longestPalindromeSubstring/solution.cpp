@@ -76,11 +76,11 @@ void runSolution() {
         {"abcddcba", {"abcddcba"}}
     };
 
-    std::cout << getResultInfoHeader() << std::endl;
-    for (auto& test : tests) {
+    runTests(tests, [](const Test& test) {
         string result = longestPalindrome(test.str);
         cout << getTestResultInfo(test.getInfo(), test.validResults, result) << endl;
-    }
+        return std::find(test.validResults.begin(), test.validResults.end(), result) != test.validResults.end();
+    });
 }
 
 

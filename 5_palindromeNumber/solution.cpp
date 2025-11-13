@@ -84,11 +84,11 @@ void runSolution() {
 
     auto testSolution = [&](const std::string& title, std::function<bool(int)> isPalindrome) {
         cout << "\n=== " << title << " SOLUTION ===" << endl;
-        cout << getResultInfoHeader() << endl;
-        for (auto& test : tests) {
+        runTests(tests, [&](const Test& test) {
             bool result = isPalindrome(test.x);
             cout << getTestResultInfo(test.getInfo(), test.expectedResult, result) << endl;
-        }
+            return test.expectedResult == result;
+        });
     };
 
     testSolution("VECTOR", isPalindromeVec);

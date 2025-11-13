@@ -52,9 +52,9 @@ void runSolution() {
         {"tmmzuxt", 5},   // "mzuxt"
     };
 
-    std::cout << getResultInfoHeader() << endl;
-    for (auto& test : tests) {
+    runTests(tests, [](const Test& test) {
         int result = lengthOfLongestSubstring(test.s);
         cout << getTestResultInfo(test.s, test.expectedResult, result) << endl;
-    }
+        return test.expectedResult == result;
+    });
 }

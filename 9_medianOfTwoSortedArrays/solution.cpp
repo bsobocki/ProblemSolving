@@ -9,7 +9,7 @@ using namespace std;
 constexpr int inf = std::numeric_limits<int>::max();
 constexpr int _inf  = std::numeric_limits<int>::min();
 
-double findMedianSortedArraysBinSearch(vector<int>& nums1, vector<int>& nums2) {
+double findMedianSortedArraysBinSearch(const vector<int>& nums1, const vector<int>& nums2) {
     // we want nums1 to be the shorter vector
     if (nums1.size() > nums2.size())
         return findMedianSortedArraysBinSearch(nums2, nums1);
@@ -70,7 +70,7 @@ double findMedianSortedArraysBinSearch(vector<int>& nums1, vector<int>& nums2) {
     return 0.0; // unreachable - satisfies compiler
 }
 
-vector<int> mergedArrays(vector<int>& nums1, vector<int>& nums2) {
+vector<int> mergedArrays(const vector<int>& nums1, const vector<int>& nums2) {
     const size_t totalSize = nums1.size() + nums2.size();
 
     vector<int> merged;
@@ -99,7 +99,7 @@ vector<int> mergedArrays(vector<int>& nums1, vector<int>& nums2) {
 
 // O(n) - time & space complexity
 // easy way - merge vectors into one and get median from that
-double findMedianWholeSortedArrays_WholeMergedArray(vector<int>& nums1, vector<int>& nums2) {
+double findMedianWholeSortedArrays_WholeMergedArray(const vector<int>& nums1, const vector<int>& nums2) {
     const size_t totalSize = nums1.size() + nums2.size();
     const size_t medianIndex = (totalSize+1)/2 - 1;
     const vector<int> merged = mergedArrays(nums1, nums2);
@@ -110,7 +110,7 @@ double findMedianWholeSortedArrays_WholeMergedArray(vector<int>& nums1, vector<i
 // O(n) - time complexity
 // O(1) - space complexity
 // easy way but a little bit upgraded - go through vectors one by one in order until you get median (basically just a half of elements)
-double findMedianSortedArrays_HalfOfMergedArray(vector<int>& nums1, vector<int>& nums2) {
+double findMedianSortedArrays_HalfOfMergedArray(const vector<int>& nums1, const vector<int>& nums2) {
     size_t totalSize = nums1.size() + nums2.size();
     size_t medianIndex = (totalSize+1)/2 - 1;
 
@@ -180,7 +180,7 @@ struct Test {
     vector<int> nums2;
     double expectedResult;
 
-    string getInfo() {
+    string getInfo() const {
         stringstream ss;
         ss << nums1 << " + " << nums2 << " => " << mergedArrays(nums1, nums2);
         return ss.str();
@@ -272,24 +272,21 @@ void runSolution() {
         {{2}, {1,3,4,5,6}, 3.5},
     };
 
-    vector<int> vec1 = {};
-    vector<int> vec2 = {2,3};
-    cout << "findMedianSortedArrays: " << findMedianSortedArraysBinSearch(vec1, vec2) << " | vec1: " << vec1 << " | vec2: " << vec2 << endl;
-
-    for (auto test : tests) {
+    runTests(tests, [](const Test& test) {
         double medianWholeArr = findMedianWholeSortedArrays_WholeMergedArray(test.nums1, test.nums2);
         double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(test.nums1, test.nums2);
         double medianBinSearch = findMedianSortedArraysBinSearch(test.nums1, test.nums2);
         bool result = medianWholeArr == medianHalfArr && medianHalfArr == test.expectedResult && medianBinSearch == test.expectedResult;
-        cout << "\ninfo: "  << test.getInfo() << "," << endl;
-        cout << "median whole: " << medianWholeArr << "," << endl;
-        cout << "median half: " << medianHalfArr << "," << endl;
-        cout << "median BinSearch: " << medianBinSearch << "," << endl;
-        cout << "expected: " << test.expectedResult << "," << endl;
-        cout << "result: " << getColoredResult(result) << endl << endl;
-    }
+        std::cout << "\ninfo: "  << test.getInfo() << "," << endl;
+        std::cout << "median whole: " << medianWholeArr << "," << endl;
+        std::cout << "median half: " << medianHalfArr << "," << endl;
+        std::cout << "median BinSearch: " << medianBinSearch << "," << endl;
+        std::cout << "expected: " << test.expectedResult << "," << endl;
+        std::cout << "result: " << getColoredResult(result) << endl << endl;
+        return result;
+    });
 
-    cout << "\n----- RANDOM TESTS - CHECK IF RESULTS THE SAME AS FOR TRIVIAL SOLUTION ----\n" << endl;
+    std::cout << "\n----- RANDOM TESTS - CHECK IF RESULTS THE SAME AS FOR TRIVIAL SOLUTION ----\n" << endl;
 
     random_device rd;
     mt19937 gen(rd());
@@ -311,8 +308,8 @@ void runSolution() {
         double medianHalfArr = findMedianSortedArrays_HalfOfMergedArray(nums1, nums2);
         double medianBinSearch = findMedianSortedArraysBinSearch(nums1, nums2);
 
-        cout << "\n" << "size1: " << size1 << ",\nsize2: " << size2;
-        cout << ",\nmedianWholeArr: " << medianWholeArr << ",\nmedianHalfArr: " << medianHalfArr << ",\nmedianBinSearch: " << medianBinSearch;
-        cout << ",\nresult: " << getColoredResult(medianWholeArr==medianHalfArr && medianHalfArr==medianBinSearch) << endl << endl;
+        std::cout << "\n" << "size1: " << size1 << ",\nsize2: " << size2;
+        std::cout << ",\nmedianWholeArr: " << medianWholeArr << ",\nmedianHalfArr: " << medianHalfArr << ",\nmedianBinSearch: " << medianBinSearch;
+        std::cout << ",\nresult: " << getColoredResult(medianWholeArr==medianHalfArr && medianHalfArr==medianBinSearch) << endl << endl;
     }
 }
