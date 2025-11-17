@@ -74,6 +74,7 @@ enum class PrintFlag : int8_t {
 };
 
 template<typename T>
+requires (!std::same_as<T, bool>)
 std::string getTestResultInfo(const std::string& testInfo, T result, bool passed, PrintFlag flag = PrintFlag::SHOW_EVERYTHING) {
     const bool showFailsOnly = flag == PrintFlag::SHOW_FAILS_ONLY;
     if (!showFailsOnly || (showFailsOnly && !passed) ) {
