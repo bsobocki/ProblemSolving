@@ -68,29 +68,49 @@ std::string getResultInfoHeader() {
     return "| TEST | EXPECTED | OUTPUT | RESULT |\n|-----------------------------------|";
 }
 
+enum class PrintFlag : int8_t {
+    SHOW_EVERYTHING,
+    SHOW_FAILS_ONLY
+};
+
 template<typename T>
-std::string getTestResultInfo(const std::string& testInfo, T result, bool passed) {
-    std::stringstream ss;
-    ss << "| " << testInfo << " | | " << result << " | " << getColoredResult(passed) << " |" ;
-    return ss.str();
-}
-template<typename T>
-std::string getTestResultInfo(const std::string& testInfo, T expected, T result) {
-    std::stringstream ss;
-    ss << "| " << testInfo << " | " << expected << " | " << result << " | " << getColoredResult(expected == result) << " |" ;
-    return ss.str();
+std::string getTestResultInfo(const std::string& testInfo, T result, bool passed, PrintFlag flag = PrintFlag::SHOW_EVERYTHING) {
+    const bool showFailsOnly = flag == PrintFlag::SHOW_FAILS_ONLY;
+    if (!showFailsOnly || (showFailsOnly && !passed) ) {
+        std::stringstream ss;
+        ss << "| " << testInfo << " | | " << result << " | " << getColoredResult(passed) << " |" ;
+        return ss.str();
+    }
+    return "";
 }
 
 template<typename T>
-std::string getTestResultInfo(const std::string& testInfo, const std::vector<T> possibleResults, T result) {
+std::string getTestResultInfo(const std::string& testInfo, T expected, T result, PrintFlag flag = PrintFlag::SHOW_EVERYTHING) {
+    const bool showFailsOnly = flag == PrintFlag::SHOW_FAILS_ONLY;
+    bool passed = expected == result;
+    if (!showFailsOnly || (showFailsOnly && !passed) ) {
+        std::stringstream ss;
+        ss << "| " << testInfo << " | " << expected << " | " << result << " | " << getColoredResult(passed) << " |" ;
+        return ss.str();
+    }
+    return "";
+}
+
+template<typename T>
+std::string getTestResultInfo(const std::string& testInfo, const std::vector<T> possibleResults, T result, PrintFlag flag = PrintFlag::SHOW_EVERYTHING) {
     bool passed = false;
     for(auto res : possibleResults) {
         if (res == result)
             passed = true;
     }
-    std::stringstream ss;
-    ss << "| " << testInfo << " | " << possibleResults << " | " << result << " | " << getColoredResult(passed) << " |" ;
-    return ss.str();
+
+    const bool showFailsOnly = flag == PrintFlag::SHOW_FAILS_ONLY;
+    if (!showFailsOnly || (showFailsOnly && !passed) ) {
+        std::stringstream ss;
+        ss << "| " << testInfo << " | " << possibleResults << " | " << result << " | " << getColoredResult(passed) << " |" ;
+        return ss.str();
+    }
+    return "";
 }
 
 template<typename TestType, typename TestFunc>
