@@ -9,7 +9,7 @@ using namespace std;
 
 struct Test {
     // input
-    // output
+    // expectedResult;
 };
 
 void runSolution() {
