@@ -45,6 +45,10 @@ if [[ ${#solution_dirs[@]} -eq 0 ]]; then
     solution_dirs=("${all_solution_dirs[@]}")
 fi
 
+echo "Cleaning old files.."
+make clean
+echo ""
+
 echo "Solutions:"
 echo "----------------------------------------------------------"
 printf '%s\n' "${solution_dirs[@]}"

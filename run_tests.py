@@ -37,6 +37,10 @@ if len(sys.argv) > 1:
 if not solutionDirs:
     solutionDirs = allSolutionDirs
 
+print("Cleaning old files..")
+subprocess.run(['make', 'clean'])
+print("")
+
 print("Solutions:")
 print("----------")
 print('\n'.join(solutionDirs))
