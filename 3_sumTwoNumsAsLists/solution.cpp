@@ -17,34 +17,37 @@ struct ListNode {
 
 // O(max(m,n))  - time complexity
 // O(max(m,n))  - space complexity
+// column addition algorithm
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     if (l1->val == 0 && !l1->next) return l2;
     if (l2->val == 0 && !l2->next) return l1;
 
-    int moved = 0;
+    // carry represents value that is carry when sum of two digits is more than 9
+    int carry = 0;
     ListNode* lsum = new ListNode();
     ListNode* lsumNode = lsum;
     do {
         int l1val = l1 ? l1->val : 0;
         int l2val = l2 ? l2->val : 0;
-        int sum = l1val + l2val + moved;
-        if (sum >= 10) {
-            sum -= 10;
-            moved = 1;
-        }
-        else {
-            moved = 0;
-        }
-        lsumNode->val = sum;
+        // current column sum is the value from current columns
+        // and carry value from exceeding 10 in previous one
+        int sum = l1val + l2val + carry;
+        int digit = sum % 10;
+        carry = sum / 10;
 
+        lsumNode->val = digit;
+
+        // moved l1 and l2 pointers to next digits or nullptr if there is no more digits
         l1 = l1 ? l1->next : l1;
         l2 = l2 ? l2->next : l2;
 
-        if (moved || l1 || l2) {
+        // if we have any digits or carry value then add a new node to sum list
+        // for the next result
+        if (carry || l1 || l2) {
             lsumNode->next = new ListNode();
             lsumNode = lsumNode->next;
         }
-        else break;
+        else break; // if we don't have any values to add then finish the loop
     } while (true);
 
     return lsum;
