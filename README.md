@@ -33,6 +33,12 @@ ProblemSolving/
 └── run_tests.py            # Automated test runner script
 ```
 
+## My Engineering Philosophy
+
+I treat algorithmic problems as engineering challenges. Instead of writing one-off scripts, I built a reusable C++20 testing framework with a custom Python runner to ensure code quality, performance, and readability.
+
+I also adhere to a "Documentation First" approach. Each problem includes a `description.md` detailing my thought process, trade-offs, and the evolution from an initial brute-force solution to the final optimized algorithm. Writing these documents helps clarify my thinking and serves as a knowledge base for future review.
+
 ## Getting Started
 
 ### Prerequisites
