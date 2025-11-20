@@ -46,7 +46,6 @@ The key insight is that `*` creates branching: we can either skip the `<char>*` 
 After implementing the naive recursion (which had exponential time complexity due to recalculating the same subproblems), I realized this problem has overlapping subproblems - the same `(i, j)` pairs are checked multiple times. This led me to memoization, and finally to a bottom-up DP solution.
 
 # Approach
-<!-- Describe your approach to solving the problem. -->
 I use **dynamic programming** where `dp[i][j]` represents whether `s[0...i-1]` matches `p[0...j-1]`.
 
 **Base cases:**
@@ -62,15 +61,13 @@ I use **dynamic programming** where `dp[i][j]` represents whether `s[0...i-1]` m
 - If current pattern character is regular or `.`:
   - Must match current characters, so result depends on: `dp[i-1][j-1]`
 
-**Evolution:** I started with naive recursion O(2^(n+m)), improved to memoized recursion O(n*m) by caching states, and finally converted to bottom-up DP for cleaner implementation.
+**Evolution:** I started with naive recursion $O(2^{n+m})$, improved to memoized recursion $O(n*m)$ by caching states, and finally converted to bottom-up DP for cleaner implementation.
 
 # Complexity
-- Time complexity: **O(n × m)**
-<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+- Time complexity: $O(n × m)$\
 We fill a table of size `(n+1) × (m+1)` where `n = s.length()` and `m = p.length()`. Each cell is computed in O(1) time.
 
-- Space complexity: **O(n × m)**
-<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+- Space complexity: $O(n × m)$\
 We use a 2D DP table of size `(n+1) × (m+1)`. This could be optimized to O(m) by using only two rows, but the current solution prioritizes clarity.
 
 
