@@ -1,273 +1,114 @@
-# Problem Solving - C++ Solutions
+# Algorithmic Problem Solving in C++20
 
-![C++](https://img.shields.io/badge/C++-17-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos-lightgrey.svg)
+![C++](https://img.shields.io/badge/Standard-C%2B%2B20-blue.svg?logo=c%2B%2B)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Build](https://img.shields.io/badge/Build-Make-orange.svg)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey.svg)
 
-A comprehensive collection of algorithmic problem solutions implemented in C++, featuring multiple approaches, complexity analysis, and extensive test coverage.
+A curated collection of efficient algorithmic solutions implemented in **Modern C++**. This project treats every problem as a case study, providing detailed documentation on intuition, complexity analysis, and testing.
 
-## Table of Contents
+## Key Features
 
-- [Overview](#overview)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Problems Solved](#problems-solved)
-- [Running Tests](#running-tests)
-- [Complexity Analysis](#complexity-analysis)
-- [Contributing](#contributing)
-
-## Overview
-
-This repository contains well-documented solutions to common algorithmic problems, often asked in technical interviews. Each solution includes:
-
-- **Multiple implementation approaches** with different time/space complexity trade-offs
-- **Comprehensive test cases** covering edge cases and various scenarios
-- **Detailed explanations** and complexity analysis
-- **Clean, readable code** following C++ best practices
+*   **Deep-Dive Documentation:** Every problem includes a `description.md` containing:
+    *   **Intuition:** The thought process behind the solution.
+    *   **Approach:** Step-by-step logic breakdown.
+    *   **Complexity:** Detailed Time $O(T)$ and Space $O(S)$ proofs.
+*   **Modern C++ Practices:** Code utilizes C++20 concepts, `std::string_view`, smart pointers, and lambdas.
+*   **Automated Testing:** Custom Python test runner with colorized diffs and edge-case validation.
+*   **Clean Architecture:** Separation of logic, testing utilities, and documentation.
 
 ## Project Structure
 
-```
+Each problem is self-contained in its own directory featuring the solution code and the documentation.
+
+```text
 ProblemSolving/
-├── utils/
-│   └── utils.hpp           # Helper utilities for testing and formatting
+├── utils/                  # Shared testing framework and printer utilities
+├── ...
+├── 14_regexMatching/       # Example Problem Directory
+│   ├── description.md      # Deep dive: Intuition, Approach, and Complexity
+│   └── solution.cpp        # C++ Implementation & Test Cases
+├── ...
 ├── main.cpp                # Entry point
-├── run_tests.py            # Python script to automate testing
-├── run_tests.sh            # Bash script to automate testing
-├── 1_longestPalindromeSubstring/
-│   ├── description.md
-│   └── solution.cpp
-├── 2_twoNumbersSum/
-│   ├── ...
-|   └── ...
-...
-└── 8_zigzagConversion/
-    ├── explanation.md
-    └── solution.cpp
+└── run_tests.py            # Automated test runner script
 ```
 
 ## Getting Started
 
 ### Prerequisites
+*   **Compiler:** GCC (`g++`) or Clang with C++20 support.
+*   **Build System:** GNU Make.
+*   **Python:** 3.x (for the test runner).
 
-- C++ compiler with C++17 support (g++, clang++)
-- Make build system
-- Python 3.x (for automated testing)
+### Compilation & Execution
 
-## Quick Start
+You can use the included scripts to run tests for specific problems or the entire suite.
 
-```bash
-# Clone the repository
-git clone https://github.com/bsobocki/ProblemSolving.git
-cd ProblemSolving
-```
-
-### Building
-
-To ***compile*** a specific solution with its tests:
-
-```bash
-make compile <solution_directory>
-```
-
-Example:
-```bash
-make compile 2_twoNumbersSum
-```
-
-### Running
-
-To ***run*** a specific solution:
-
-```bash
-make run <solution_directory>
-```
-
-Example:
-```bash
-make run 2_twoNumbersSum
-```
-
-## Running Tests
-
-You can use `run_tests.py` or `run_tests.sh` to ***compile*** and ***run*** solutions with tests.
-
-### Run All Tests
-
+**1. Run All Tests**
 ```bash
 python run_tests.py
 ```
 
-### Run Specific Test
-
+**2. Run a Specific Problem**
+Target a problem by ID or directory name:
 ```bash
-python run_tests.py --test=2
+python run_tests.py --test=14
+# OR
+python run_tests.py 14_regexMatching
 ```
 
-or
-
+**3. Manual Build (Make)**
 ```bash
-python run_tests.py 2_twoNumbersSum
+make compile 14_regexMatching
+make run 14_regexMatching
 ```
 
-### Test Output
+## Solutions Index
 
-The test framework provides colorized output showing:
-- Test input
-- Expected output
-- Actual output
-- Pass/Fail status with ✓ or ✗ indicators
+| ID | Problem | Difficulty | Approach | Time | Space |
+|:---:|:---|:---:|:---|:---:|:---:|
+| 0 | [Sort Array By Parity](./0_sortArrayByParity) | Easy | Two Pointers (In-place) | $O(n)$ | $O(1)$ |
+| 1 | [Longest Palindrome Substring](./1_longestPalindromeSubstring) | Medium | Expand Around Center | $O(n^2)$ | $O(1)$ |
+| 2 | [Two Sum](./2_twoNumbersSum) | Easy | Hash Map | $O(n)$ | $O(n)$ |
+| 3 | [Add Two Numbers](./3_sumTwoNumsAsLists) | Medium | Linked List Traversal | $O(n)$ | $O(n)$ |
+| 4 | [Longest Substring No Repeats](./4_lengthOfLongestSubstringWithUniqeChars) | Medium | Sliding Window | $O(n)$ | $O(1)$ |
+| 5 | [Palindrome Number](./5_palindromeNumber) | Easy | Half-Number Reversal | $O(\log n)$ | $O(1)$ |
+| 6 | [Longest Common Prefix](./6_longestCommonPrefix) | Easy | Vertical Scanning | $O(S)$ | $O(1)$ |
+| 7 | [Halves Are Alike](./7_halvesAreAlike) | Easy | Counting | $O(n)$ | $O(1)$ |
+| 8 | [Zigzag Conversion](./8_zigzagConversion) | Medium | Mathematical Traversal | $O(n)$ | $O(n)$ |
+| 9 | [Median of Two Sorted Arrays](./9_medianOfTwoSortedArrays) | Hard | Binary Search Partitioning | $O(\log n)$ | $O(1)$ |
+| 10 | [Reverse Integer](./10_reverseInteger) | Medium | Modulo Arithmetic | $O(\log x)$ | $O(1)$ |
+| 11 | [String to Integer (atoi)](./11_atoi) | Medium | Deterministic Finite Automaton | $O(n)$ | $O(1)$ |
+| 12 | [Lowest Common Ancestor](./12_lowestCommonAncestor) | Medium | Recursive DFS | $O(n)$ | $O(h)$ |
+| 13 | [Substrings With Only 1s](./13_numberOfSubstringsWithOnly1s) | Medium | Arithmetic Progression | $O(n)$ | $O(1)$ |
+| 14 | [Regular Expression Matching](./14_regexMatching) | Hard | Dynamic Programming (Bottom-Up) | $O(nm)$ | $O(nm)$ |
+| 15 | [Check 1s Distance](./15_checkIfAll1sAreAtLeastKPlacesAway) | Easy | Linear Scan | $O(n)$ | $O(1)$ |
+| 16 | [1-bit and 2-bit Characters](./16_1bit2bitCharacters) | Easy | Linear Simulation | $O(n)$ | $O(1)$ |
+| 17 | [Keep Multiplying Found Values](./17_keepMultiplyingFoundValuesByTwo) | Easy | Hash Set / Linear Search | $O(n)$ | $O(n)$ |
+| 18 | [Container With Most Water](./18_containerWithMostWater) | Medium | Greedy Two Pointers | $O(n)$ | $O(1)$ |
 
-Example output:
+## Utility Framework
 
-![Alt text](assets/output_screen_1.png)
+The repository includes a header-only library (`utils/utils.hpp`) to streamline competitive programming in C++.
 
-
-## Problems Solved
-
-### 1. Longest Palindrome Substring
-**Difficulty:** Medium
-
-Find the longest palindromic substring in a given string.
-
-- **Approach:** Expand around center
-- **Time Complexity:** O(n²)
-- **Space Complexity:** O(1)
-
----
-
-### 2. Two Sum
-**Difficulty:** Easy
-
-Find two numbers in an array that add up to a target value.
-
-**Multiple Solutions:**
-- Brute Force: O(n²) time, O(1) space
-- Sort + Two Pointers: O(n log n) time, O(n) space
-- Hash Map: O(n) time, O(n) space ✅ *Optimal*
-
----
-
-### 3. Add Two Numbers (Linked Lists)
-**Difficulty:** Medium
-
-Add two numbers represented as linked lists, where digits are stored in reverse order.
-
-- **Time Complexity:** O(max(m, n))
-- **Space Complexity:** O(max(m, n))
-
----
-
-### 4. Longest Substring Without Repeating Characters
-**Difficulty:** Medium
-
-Find the length of the longest substring without repeating characters.
-
-- **Approach:** Sliding window with hash map
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(min(m, n)), where m is charset size
-
----
-
-### 5. Palindrome Number
-**Difficulty:** Easy
-
-Determine if an integer is a palindrome without converting to string.
-
-**Multiple Solutions:**
-- Vector approach: O(log n) time, O(log n) space
-- Reverse full number: O(log n) time, O(1) space
-- Reverse half number: O(log n) time, O(1) space ✅ *Most efficient*
-
----
-
-### 6. Longest Common Prefix
-**Difficulty:** Easy
-
-Find the longest common prefix string amongst an array of strings.
-
-- **Time Complexity:** O(S), where S is sum of all characters
-- **Space Complexity:** O(1)
-
----
-
-### 7. Halves Are Alike
-**Difficulty:** Easy
-
-Determine if two halves of a string have the same number of vowels.
-
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(1)
-
----
-
-### 8. Zigzag Conversion
-**Difficulty:** Medium
-
-Convert a string to zigzag pattern and read line by line.
-
-- **Approach:** Mathematical pattern recognition
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(n)
-- Includes detailed [explanation](8_zigzagConversion/explanation.md)
-
-
-## Complexity Analysis
-
-Each solution includes detailed complexity analysis:
-
-- **Time Complexity:** How runtime scales with input size
-- **Space Complexity:** Additional memory used by the algorithm
-- **Trade-offs:** Discussion of different approaches when multiple solutions exist
-
-## Utility Functions
-
-The `utils/utils.hpp` provides:
-
-- **Template-based container printing** - Automatic formatting for STL containers
-- **Test result formatting** - Colorized pass/fail indicators
-- **Generic testing framework** - Easy-to-use test case evaluation
+**Features:**
+*   **Pretty Printing:** Overloaded `operator<<` for `std::vector`, `std::map`, and other STL containers to simplify debugging.
+*   **Test Macros:** Helper functions to assert equality and print formatted pass/fail logs in the console.
 
 ```cpp
-// Example usage
-std::vector<int> nums = {1, 2, 3};
-std::cout << nums;  // Outputs: {1, 2, 3}
+#include <utils/utils.hpp>
 
-auto result = getTestResultInfo("Test case", expected, actual);
+std::vector<int> vec = {1, 2, 3};
+std::cout << vec; // Outputs: "{1, 2, 3}"
 ```
 
 ## Contributing
 
-Contributions are welcome! To add a new solution:
-
-1. Create a new directory with format: `<number>_<problemName>/` using
-    ```bash
-    ./create_solution.sh <your_solution_name>
-    ```
-    It will create a new solution directory with the highest number and `solution.cpp` template.
-2. Add `description.md` with problem statement
-3. Implement solution in `solution.cpp` with:
-   - The solution function
-   - Test cases
-   - `runSolution()` function
-4. Include complexity analysis in comments or `description.md`
-5. Ensure all tests pass
+1.  Run the generation script: `./create_solution.sh <problem_name>`
+2.  Implement the logic in `solution.cpp`.
+3.  Fill out the `description.md` with your intuition and complexity analysis.
+4.  Ensure all tests pass via `python run_tests.py`.
 
 ## License
 
-This project is open source and available for educational purposes.
-
-## Resources
-
-- [LeetCode](https://leetcode.com/) - Source of many problems
-- [Big-O Cheat Sheet](https://www.bigocheatsheet.com/) - Complexity reference
-- [C++ Reference](https://en.cppreference.com/) - C++ documentation
-
-## Acknowledgments
-
-Solutions are implemented with a focus on:
-- Educational value
-- Code readability
-- Performance optimization
-- Best practices in C++ programming
-
+Distributed under the MIT License. See `LICENSE` for more information.
