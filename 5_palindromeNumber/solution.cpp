@@ -6,6 +6,7 @@
 using namespace std;
 
 // O(log_10 n) - time & space complexity
+// take digits and compare
 bool isPalindromeVec(int x) {
     if (x < 0) return false;
 
@@ -22,7 +23,7 @@ bool isPalindromeVec(int x) {
     return true;
 }
 
-// reverse the whole X
+// reverse the whole X as a number and compare with original x
 // O(log_10 n) - time complexity
 // O(1)        - space complexity
 bool isPalindromeRev(int x) {
