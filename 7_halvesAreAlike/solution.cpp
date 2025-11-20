@@ -8,20 +8,16 @@ using namespace std;
 // O(n) - time complexity
 // O(1) - space complexity
 bool halvesAreAlike(string s) {
-    int countPart1 = 0;
-    int countPart2 = 0;
+    const std::vector<char> vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
     size_t halfSize = s.size()/2;
-    char vowels [] = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+
     auto isVowel = [&vowels](const char& c) {
-        for (int i=0; i<10; i++)
-            if (c == vowels[i]) return true;
-        return false;
+        return std::find(vowels.begin(), vowels.end(), c) != vowels.end();
     };
 
-    for (int i=0; i<halfSize; i++) {
-        if (isVowel(s[i])) countPart1 ++;
-        if (isVowel(s[i+halfSize])) countPart2 ++;
-    }
+    int countPart1 = std::count_if(s.begin(), s.begin()+halfSize, isVowel);
+    int countPart2 = std::count_if(s.begin()+halfSize, s.end(), isVowel);
+
     return countPart1 == countPart2;
 }
 
