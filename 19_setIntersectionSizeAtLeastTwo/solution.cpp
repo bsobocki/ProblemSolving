@@ -12,7 +12,13 @@ std::string intervalsToString(const vector<vector<int>>& intervals) {
     return ss.str();
 }
 
-// optimal solution - built based on my previous one and the power of internet :D 
+// -------------------------------------------------------------
+// OPTIMAL SOLUTION
+// Time: O(N log N) | Space: O(1)
+// Refined solution using the standard Greedy approach.
+// It optimizes space by tracking only the two necessary points 
+// (lastAdded and prevAdded) instead of storing the whole history.
+// -------------------------------------------------------------
 int intersectionSizeTwo(const vector<vector<int>>& intervals) {
     // for my tests (i have const reference because of how i run my tests) - additional copy O(n)
     std::vector<std::vector<int>> intvls = intervals;
@@ -55,6 +61,14 @@ int intersectionSizeTwo(const vector<vector<int>>& intervals) {
     return count;
 }
 
+// -------------------------------------------------------------
+// ORIGINAL "PHASE 1" SOLUTION (Set-Based)
+// Time: O(N log N) | Space: O(N)
+// My initial independent solution.
+// It solves the problem correctly by simulating the process with a Set.
+// While correct, it uses more memory O(N) than the greedy approach.
+// -------------------------------------------------------------
+
 // find maximum value that is less or equal than val
 // returns set.end() if there is no such value
 auto find_max_less_equal(const std::set<int>& set, int val)
@@ -76,7 +90,6 @@ auto find_max_less_equal(const std::set<int>& set, int val)
     return std::prev(i);
 }
 
-// my first attempt build 100% on my own: overcomplicated
 int intersectionSizeTwoOvercomplicated(const vector<vector<int>>& intervals) {
     // for my tests (i have const reference because of how i run my tests) - additional copy O(n)
     std::vector<std::vector<int>> intvls = intervals;
