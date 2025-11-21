@@ -92,8 +92,8 @@ make run 14_regexMatching
 | 16 | [1-bit and 2-bit Characters](./16_1bit2bitCharacters) | Easy | Linear Simulation | $O(n)$ | $O(1)$ |
 | 17 | [Keep Multiplying Found Values](./17_keepMultiplyingFoundValuesByTwo) | Easy | Hash Set / Linear Search | $O(n)$ | $O(n)$ |
 | 18 | [Container With Most Water](./18_containerWithMostWater) | Medium | Greedy Two Pointers | $O(n)$ | $O(1)$ |
-| 19 | [Set Intersection Size At Least Two](./19_setIntersectionSizeAtLeastTwo) | Hard | Greedy (Sorted Intervals) | $O(N \log N)$ | $O(1)$ |
-| 20 | [Unique Length 3 Palindromic Subsequences](./20_UniqueLen3PalindromicSubsequence) | Medium | Ranges | $O(N)$ | $O(1)$ |
+| 19 | [Set Intersection Size At Least Two](./19_setIntersectionSizeAtLeastTwo) | Hard | Greedy (Sorted Intervals) | $O(n \log n)$ | $O(1)$ |
+| 20 | [Unique Length 3 Palindromic Subsequences](./20_UniqueLen3PalindromicSubsequence) | Medium | Ranges | $O(n)$ | $O(1)$ |
 
 
 ## Utility Framework
