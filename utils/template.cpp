@@ -18,6 +18,6 @@ void runSolution() {
     };
 
     runTests(tests, [](const Test& test){
-
+        return true;
     });
 }

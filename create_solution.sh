@@ -10,4 +10,4 @@ solution_dir=${new_solution_number}_$solution_name
 
 mkdir $solution_dir
 cp utils/template.cpp $solution_dir/solution.cpp
-touch $solution_dir/description.md
+echo "# Problem" > $solution_dir/description.md
