@@ -104,6 +104,8 @@ The repository includes a header-only library (`utils/utils.hpp`) to streamline 
 *   **Pretty Printing:** Overloaded `operator<<` for `std::vector`, `std::map`, and other STL containers to simplify debugging.
 *   **Test Macros:** Helper functions to assert equality and print formatted pass/fail logs in the console.
 
+You can read more in [utils/README.md](./utils/README.md).
+
 ```cpp
 #include <utils/utils.hpp>
 
