@@ -31,7 +31,7 @@ void runSolution() {
         { {3, 6, 9}, 0 },
 
         // Scenario: All numbers need operations
-        // 1(rem 1), 2(rem 2), 4(rem 1), 5(rem 2). Total 4.
+        // 1(rem 1), 2(add 1), 4(rem 1), 5(add 1). Total 4.
         { {1, 2, 4, 5}, 4 },
 
         // Edge Case: Single element, needs operation
