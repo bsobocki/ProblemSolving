@@ -94,6 +94,8 @@ make run 14_regexMatching
 | 18 | [Container With Most Water](./18_containerWithMostWater) | Medium | Greedy Two Pointers | $O(n)$ | $O(1)$ |
 | 19 | [Set Intersection Size At Least Two](./19_setIntersectionSizeAtLeastTwo) | Hard | Greedy (Sorted Intervals) | $O(n \log n)$ | $O(1)$ |
 | 20 | [Unique Length 3 Palindromic Subsequences](./20_UniqueLen3PalindromicSubsequence) | Medium | Ranges | $O(n)$ | $O(1)$ |
+| 21 | [Minimum Operations To Make All Numbers Divisable By 3](./21_minimumOperationsToMakeAllDivisibleBy3) | Easy | Count numbers where `nums[i] % 3 != 0` | $O(n)$ | $O(1)$ |
+| 22 | [Integer To Roman](./20_UniqueLen3PalindromicSubsequence) | Medium | Create digit by digit | $O(log_{10}num)$ in general, but with constraints $O(1)$ | $O(log_{10}num)$ in general, but with constraints $O(1)$ |
 
 
 ## Utility Framework
