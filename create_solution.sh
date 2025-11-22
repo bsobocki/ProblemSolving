@@ -9,5 +9,5 @@ new_solution_number=$((max_solution_number + 1))
 solution_dir=${new_solution_number}_$solution_name
 
 mkdir $solution_dir
-cp utils/template.cpp $solution_dir/solution.cpp
-echo "# Problem" > $solution_dir/description.md
+cp utils/solution_template.cpp $solution_dir/solution.cpp
+cp utils/description_template.md $solution_dir/description.md
