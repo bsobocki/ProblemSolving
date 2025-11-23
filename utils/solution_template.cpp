@@ -10,6 +10,12 @@ using namespace std;
 struct Test {
     // input
     // expectedResult;
+
+    std::string getInfo() const {
+        stringstream ss;
+        // ss << input;
+        return ss.str();
+    }
 };
 
 void runSolution() {
@@ -18,6 +24,9 @@ void runSolution() {
     };
 
     runTests(tests, [](const Test& test){
+        // result_type result = solution(test.input);
+        // std::cout << getTestResultInfo(test.getInfo(), test.expectedResult, result) << std::endl;
+        // return result == test.expectedResult;
         return true;
     });
 }
