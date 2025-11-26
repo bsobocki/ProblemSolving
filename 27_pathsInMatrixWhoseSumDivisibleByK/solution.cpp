@@ -32,8 +32,8 @@ int paths(int i, int j, int reminder, grid_t& grid, int k) {
 
 // as a first attempt do a recursion
 // Time Complexity: O(2^(nm))
-// Space Complexity: O(n)
-// (constant additional memory for one function call allocated O(n) times on the stack at once)
+// Space Complexity: O(n+m)
+// (constant additional memory for one function call allocated O(n+m) times on the stack at once)
 int numberOfPathsRecursion(vector<vector<int>>& grid, int k) {
     const int rows = grid.size();
     // from constraints we know that grid is not empty
