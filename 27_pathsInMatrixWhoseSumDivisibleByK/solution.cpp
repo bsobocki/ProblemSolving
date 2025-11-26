@@ -146,7 +146,6 @@ void runSolution() {
     runTests(tests, [](const Test& test){
         int result = numberOfPathsMemorized(test.grid, test.k);
         std::cout << getTestResultInfo(test.getInfo(), test.expectedResult, result) << std::endl;
-        // return result == test.expectedResult;
-        return true;
+        return result == test.expectedResult;
     });
 }
