@@ -82,3 +82,4 @@ This solution evolved through four stages of optimization.
 
 - **Space Complexity:** $O(1)$
     - We use fixed-size arrays (size 26) or integers for storage, regardless of input size.
+    Since the solution is iterative and uses a bitmask integer, the auxiliary space is strictly $O(1)$ registers/stack variables, with no heap allocation.

@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// Note: The function signature was optimized from the LeetCode default (pass-by-value) to pass-by-const-reference to avoid unnecessary O(N) string copying.
+
 // for better readability than std::pair
 struct range {
     int start;
@@ -19,7 +21,7 @@ struct range {
 // 2. create hashsets uniqueCharsFromRange (or array for each engilsh small letter with count 0 or 1 as an optimization) for unique chars in range
 // 3. for each uniques in uniqueCharsFromRange: result += uniques.size();
 // 4. return result
-int countPalindromicSubsequence(string s) {
+int countPalindromicSubsequence(const string& s) {
     constexpr size_t LETTERS_COUNT = 26;
     auto idx = [](const char c) { return c-'a'; };
 
@@ -66,7 +68,7 @@ int countPalindromicSubsequence(string s) {
 // --------------------------------------------------------
 // just one optimization unordered_set -> std::vector<int> with counts
 // makes it much faster and lighter!!
-int betterOptimizedCountPalindromicSubsequence(string s) {
+int betterOptimizedCountPalindromicSubsequence(const string& s) {
     constexpr size_t LETTERS_COUNT = 26;
     auto idx = [](const char c) { return c-'a'; };
 
@@ -114,7 +116,7 @@ int betterOptimizedCountPalindromicSubsequence(string s) {
 // even better version: optimalization from version above + inverted loops
 // because of that i could change vector<vector<int>> to one vector<int>
 // to make it even faster we could use bits for counting letters because we only counts 0 or 1
-int optimalCountPalindromicSubsequence(string s) {
+int optimalCountPalindromicSubsequence(const string& s) {
     constexpr size_t LETTERS_COUNT = 26;
     auto idx = [](const char c) { return c-'a'; };
 
@@ -166,7 +168,7 @@ int optimalCountPalindromicSubsequence(string s) {
 // --------------------------------------------------------
 // the best version: optimalization from version above + bitmap for checking seen letters
 // because of that i could change vector<int> to one int
-int optimalBitmapCountPalindromicSubsequence(string s) {
+int optimalBitmapCountPalindromicSubsequence(const string& s) {
     constexpr size_t LETTERS_COUNT = 26;
     auto idx = [](const char c) { return c-'a'; };
 
