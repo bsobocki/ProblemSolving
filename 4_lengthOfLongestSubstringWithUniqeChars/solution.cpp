@@ -17,7 +17,7 @@ using namespace std;
 // ^
 // we move start to seen[chr] + 1, so now start = 1
 // u b s t r i n g - our longest unique substring
-int lengthOfLongestSubstring(string s) {
+int lengthOfLongestSubstring(const string& s) {
     int start = 0;
     int maxSize = 0;
     std::unordered_map<char, int> seen;
