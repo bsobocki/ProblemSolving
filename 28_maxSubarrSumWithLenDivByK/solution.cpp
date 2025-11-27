@@ -57,6 +57,7 @@ long long maxSubarraySumSlightlyBetterThanSlow(vector<int>& nums, int k) {
 }
 
 /*
+ * Problem: time limit exceeded
  * Problem: Memory Limit Exceeded
  * ----------------------------
  * Time Complexity: O(n(n/k))
@@ -109,6 +110,8 @@ long long maxSubarraySumDP(vector<int>& nums, int k) {
 }
 
 /*
+ * Problem: time limit exceeded
+ * ----------------------------
  * Time Complexity: O(n(n/k))
  * Space Complexity: O(n) -- only three sum arrays of O(n) length: for k-subarrays, prev and current
  * ----------------------------
