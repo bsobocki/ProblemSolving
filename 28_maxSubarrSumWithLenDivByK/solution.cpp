@@ -12,7 +12,7 @@ using namespace std;
  * Space Complexity: O(1)
  * ----------------------------
  */
-long long maxSubarraySumSlow(vector<int>& nums, int k) {
+long long maxSubarraySumSlow(const vector<int>& nums, int k) {
     if (k > nums.size()) return 0;
 
     long long maxSum = std::accumulate(nums.begin(), nums.begin() + k, 0LL);
@@ -36,7 +36,7 @@ long long maxSubarraySumSlow(vector<int>& nums, int k) {
  * Space Complexity: O(1)
  * ----------------------------
  */
-long long maxSubarraySumSlightlyBetterThanSlow(vector<int>& nums, int k) {
+long long maxSubarraySumSlightlyBetterThanSlow(const vector<int>& nums, int k) {
     if (k > nums.size()) return 0;
 
     long long maxSum = std::accumulate(nums.begin(), nums.begin() + k, 0LL);
@@ -71,7 +71,7 @@ long long maxSubarraySumSlightlyBetterThanSlow(vector<int>& nums, int k) {
  * in that case our sum will be equal (sum from the prevoius range + sum of those next k elements)
  * but sum of those next k element has been calculated before and saved in sums[i+prevSubSize][k] - sum of k elements starts after previous range
  */
-long long maxSubarraySumDP(vector<int>& nums, int k) {
+long long maxSubarraySumDP(const vector<int>& nums, int k) {
     if (k > nums.size()) return 0;
 
     const int numOfSubSizes = nums.size()/k;
@@ -228,7 +228,7 @@ long long maxSubarraySum(const vector<int>& nums, int k) {
 /*
  * Exactly the same as maxSubarraySum but with different approach of handling cases for (n*k)th elements
  */
-long long maxSubarraySumButInitializeMinPrefixArrayAt0(vector<int>& nums, int k) {
+long long maxSubarraySumButInitializeMinPrefixArrayAt0(const vector<int>& nums, int k) {
     long long maxSum = LLONG_MIN;
 
     vector<long long> minPrefixSumForReminder(k, LLONG_MAX);
