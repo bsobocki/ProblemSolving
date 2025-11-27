@@ -7,7 +7,7 @@ using namespace std;
 
 // O(n) - time complexity
 // O(1) - space complexity
-bool halvesAreAlike(string s) {
+bool halvesAreAlike(const string& s) {
     const std::vector<char> vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
     size_t halfSize = s.size()/2;
 
