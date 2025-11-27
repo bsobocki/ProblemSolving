@@ -14,7 +14,7 @@ std::string_view trimLeft(std::string_view s) {
     return s.substr(firstNotWhiteChar - s.begin());
 }
 
-int myAtoi(string s) {
+int myAtoi(const string& s) {
     std::string_view input = trimLeft(s);
 
     if (input.empty()) return 0;
