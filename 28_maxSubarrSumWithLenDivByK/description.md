@@ -96,7 +96,7 @@ Why do the remainders have to be the same?
         *   Therefore: `remainderJ == remainderI`.
 
 **The Algorithm:**
-We iterate through the array once. We maintain a `minPrefixSumForReminder` array where `minPrefixSumForReminder[r]` stores the minimum prefix sum seen so far at an index with remainder `r`.
+We iterate through the array once. We maintain a `minPrefixSumForReminder` array where `minPrefixSumForReminder[r]` stores the minimum prefix sum seen so far at an index with remainder `r`. For each prefix we will calculate the maximum sum for current place using `currPrefix` and `minPrefixSumForReminder[r]`, and compare it to `maxSum`.
 
 #### Handling the "Start of Array" Case
 There was a logical challenge: what if we check prefix sum for the `kth` element, when the current remainder is `0`?
