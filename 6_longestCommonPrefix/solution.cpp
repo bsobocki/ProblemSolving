@@ -7,7 +7,7 @@ using namespace std;
 // O(S) - time complexity
 // O(1) - space complexity
 // where S = sum of all characters in all strings
-string longestCommonPrefix(vector<string>& strs) {
+string longestCommonPrefix(const vector<string>& strs) {
     if (strs.empty()) return "";
     // for (auto& str : strs)
     //     if (str.empty()) return "";
@@ -57,8 +57,7 @@ void runSolution() {
     };
 
     runTests(tests, [](const Test& test) {
-        auto strs = test.strs;
-        string result = longestCommonPrefix(strs);
+        string result = longestCommonPrefix(test.strs);
         cout << getTestResultInfo(to_string(test.strs), test.expectedResult, result) << endl;
         return test.expectedResult == result;
     });
