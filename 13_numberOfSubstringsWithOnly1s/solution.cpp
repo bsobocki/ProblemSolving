@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int numSub(string s) {
+int numSub(const string& s) {
     constexpr int mod = 1000000007;
     auto l = s.begin();
     auto r = s.begin();
