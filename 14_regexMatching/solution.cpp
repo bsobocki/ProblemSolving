@@ -6,7 +6,7 @@ using namespace std;
 // easiest recurstion attempt
 // Time complexity: O((n+m)*2^(n+m)), because we have two branches (recalculating everything) and makes substrings each time (for p and s)
 // Space Complexity O((n+m)^2), because call stack depth is O(n+m) in worst case (each call takes one char from s and/or p, so in total we have n+m depth)
-bool isMatchSlowerRecursion(string s, string p) {
+bool isMatchSlowerRecursion(const string& s, const string& p) {
     if (s.empty()) {
         // from description: "It is guaranteed for each appearance of the character '*', there will be a previous valid character to match."
         // so check if we have only star expressions <char>* in regex by checking is size is even and number of stars is size/2
@@ -94,7 +94,7 @@ bool isMatchMemo(const string& s, int i, const string& p, int j, std::vector<std
 }
 
 // much faster solution !!
-bool isMatchMemorizedRecursion(string s, string p) {
+bool isMatchMemorizedRecursion(const string& s, const string& p) {
     // we will create a table for our cases s[0..i] matches p[0..j] - with empty strings checks
     // for the same checks we did in recursion solution
     // not initialized: -1, false: 0, true: 1
@@ -103,7 +103,7 @@ bool isMatchMemorizedRecursion(string s, string p) {
 }
 
 // helper function for debugging Dynamic Programming Algorithm
-void writeDP(string s, string p, const vector<vector<bool>>& vec) {
+void writeDP(const string& s, const string& p, const vector<vector<bool>>& vec) {
     cout << endl << std::string(4*(p.size()+2)+1, '-') << std::endl;
     cout << "| # |   | ";
     for (auto c : p) cout << c << " | ";
@@ -125,7 +125,7 @@ void writeDP(string s, string p, const vector<vector<bool>>& vec) {
 
 // we have the first attempt done as isMatchSlowerRecursion(string, string)
 // but it is very very slow, so based on that we will try to build Dynamic Programming Solution
-bool isMatch(string s, string p) {
+bool isMatch(const string& s, const string& p) {
     // we will create a table for our cases s[0..i] matches p[0..j] - with empty strings
     // the same checks we did in recursion solution, but here empty strings are at 0 indexes
     // index tells about string length (i tells about current s length and j about p)
