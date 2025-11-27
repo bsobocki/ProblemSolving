@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool isPalindrome(string str, int i=0, int j=-1) {
+bool isPalindrome(const string& str, int i=0, int j=-1) {
     if (j==-1) j += str.size();
     for(; i < j; i++, j--) {
         if (str[i] != str[j]) return false;
@@ -14,7 +14,7 @@ bool isPalindrome(string str, int i=0, int j=-1) {
 }
 
 // most intuitive (and slowest) recursive
-std::string longestPalindromeRecursive(string str) {
+std::string longestPalindromeRecursive(const string& str) {
     if (str.size() < 2) return str;
 
     if (isPalindrome(str)) return str;
@@ -28,7 +28,7 @@ std::string longestPalindromeRecursive(string str) {
 }
 
 // slightly better because of memorizing calculated states
-std::string longestPalindromeRec(string& str, int i, int j, vector<vector<string>>& mem) {
+std::string longestPalindromeRec(const string& str, int i, int j, vector<vector<string>>& mem) {
     if (mem[i][j] != "") return mem[i][j];
     
     if (i >= j){
@@ -56,7 +56,7 @@ std::string longestPalindromeRec(string& str, int i, int j, vector<vector<string
 
 // memorized recursion - optimization
 // but memorizing string - O(n^3)
-string longestPalindromeRecursiveBetter(string str) {
+string longestPalindromeRecursiveBetter(const string& str) {
     if (str.empty()) return str;
 
     std::vector<std::vector<string>> mem(str.size(), std::vector<string>(str.size(), ""));
