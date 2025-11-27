@@ -3,7 +3,7 @@
 
 using namespace std;
 
-vector<bool> prefixesDivBy5(vector<int>& nums) {
+vector<bool> prefixesDivBy5(const vector<int>& nums) {
     vector<bool> result;
     // reserve space to avoid reallocations
     result.reserve(nums.size());
