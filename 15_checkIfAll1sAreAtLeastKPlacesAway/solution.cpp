@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool kLengthApart(vector<int> nums, int k) {
+bool kLengthApart(const vector<int>& nums, int k) {
     auto it = std::find(nums.begin(), nums.end(), 1);
     while(it != nums.end()) {
         auto next = std::find(it+1, nums.end(), 1);
