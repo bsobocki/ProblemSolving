@@ -6,7 +6,7 @@ using namespace std;
 
 // O(n) - time complexity
 // O(n) - space complexity
-string convert(string s, int numRows) {
+string convert(const string& s, int numRows) {
     if (numRows == 1 || s.length() == 0 || numRows >= s.length()) return s;
 
     string result;
