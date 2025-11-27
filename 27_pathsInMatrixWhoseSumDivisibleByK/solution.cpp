@@ -7,7 +7,7 @@ using memo_t = vector<vector<vector<int>>>;
 
 constexpr int modulo = 1000000007;
 
-int paths(int i, int j, int reminder, grid_t& grid, int k) {
+int paths(int i, int j, int reminder, const grid_t& grid, int k) {
     const int rows = grid.size();
     // from constraints we know that grid is not empty
     const int columns = grid[0].size();
@@ -34,7 +34,7 @@ int paths(int i, int j, int reminder, grid_t& grid, int k) {
 // Time Complexity: O(2^(nm))
 // Space Complexity: O(n+m)
 // (constant additional memory for one function call allocated O(n+m) times on the stack at once)
-int numberOfPathsRecursion(vector<vector<int>>& grid, int k) {
+int numberOfPathsRecursion(const vector<vector<int>>& grid, int k) {
     const int rows = grid.size();
     // from constraints we know that grid is not empty
     const int columns = grid[0].size();
