@@ -73,35 +73,35 @@ make run 14_regexMatching
 
 | ID | Problem | Difficulty | Approach | Time | Space |
 |:---:|:---|:---:|:---|:---:|:---:|
-| 0 | [Sort Array By Parity](./0_sortArrayByParity) | Easy | Two Pointers (In-place) | $O(n)$ | $O(1)$ |
-| 1 | [Longest Palindrome Substring](./1_longestPalindromeSubstring) | Medium | Expand Around Center | $O(n^2)$ | $O(1)$ |
-| 2 | [Two Sum](./2_twoNumbersSum) | Easy | Hash Map | $O(n)$ | $O(n)$ |
-| 3 | [Add Two Numbers](./3_sumTwoNumsAsLists) | Medium | Linked List Traversal | $O(n)$ | $O(n)$ |
-| 4 | [Longest Substring No Repeats](./4_lengthOfLongestSubstringWithUniqeChars) | Medium | Sliding Window | $O(n)$ | $O(1)$ |
-| 5 | [Palindrome Number](./5_palindromeNumber) | Easy | Half-Number Reversal | $O(\log n)$ | $O(1)$ |
-| 6 | [Longest Common Prefix](./6_longestCommonPrefix) | Easy | Vertical Scanning | $O(S)$ | $O(1)$ |
-| 7 | [Halves Are Alike](./7_halvesAreAlike) | Easy | Counting | $O(n)$ | $O(1)$ |
-| 8 | [Zigzag Conversion](./8_zigzagConversion) | Medium | Mathematical Traversal | $O(n)$ | $O(n)$ |
-| 9 | [Median of Two Sorted Arrays](./9_medianOfTwoSortedArrays) | Hard | Binary Search Partitioning | $O(\log n)$ | $O(1)$ |
-| 10 | [Reverse Integer](./10_reverseInteger) | Medium | Modulo Arithmetic | $O(\log x)$ | $O(1)$ |
-| 11 | [String to Integer (atoi)](./11_atoi) | Medium | Deterministic Finite Automaton | $O(n)$ | $O(1)$ |
-| 12 | [Lowest Common Ancestor](./12_lowestCommonAncestor) | Medium | Recursive DFS | $O(n)$ | $O(h)$ |
-| 13 | [Substrings With Only 1s](./13_numberOfSubstringsWithOnly1s) | Medium | Arithmetic Progression | $O(n)$ | $O(1)$ |
-| 14 | [Regular Expression Matching](./14_regexMatching) | Hard | Dynamic Programming (Bottom-Up) | $O(nm)$ | $O(nm)$ |
-| 15 | [Check 1s Distance](./15_checkIfAll1sAreAtLeastKPlacesAway) | Easy | Linear Scan | $O(n)$ | $O(1)$ |
-| 16 | [1-bit and 2-bit Characters](./16_1bit2bitCharacters) | Easy | Linear Simulation | $O(n)$ | $O(1)$ |
-| 17 | [Keep Multiplying Found Values](./17_keepMultiplyingFoundValuesByTwo) | Easy | Hash Set / Linear Search | $O(n)$ | $O(n)$ |
-| 18 | [Container With Most Water](./18_containerWithMostWater) | Medium | Greedy Two Pointers | $O(n)$ | $O(1)$ |
-| 19 | [Set Intersection Size At Least Two](./19_setIntersectionSizeAtLeastTwo) | Hard | Greedy (Sorted Intervals) | $O(n \log n)$ | $O(1)$ |
-| 20 | [Unique Length 3 Palindromic Subsequences](./20_UniqueLen3PalindromicSubsequence) | Medium | Ranges + Bitmask | $O(n)$ | $O(1)$ |
-| 21 | [Minimum Operations To Make Divisible By 3](./21_minimumOperationsToMakeAllDivisibleBy3) | Easy | Linear Scan / Counting | $O(n)$ | $O(1)$ |
-| 22 | [Integer To Roman](./22_intToRoman) | Medium | Greedy Digit Processing | $O(1)$ | $O(1)$ |
-| 23 | [Greatest Sum Divisible by 3](./23_greatestSumDivisibleBy3) | Medium | Modular Arithmetic Tracking | $O(n)$ | $O(1)$ |
-| 24 | [Roman to Integer](./24_romanToInt) | Easy | Linear Scan with Lookahead | $O(n)$ | $O(1)$ |
-| 26 | [Smallest Integer Divisible by K](./26_smallestIntegerDivisibleByK) | Medium | Pigeonhole Principle (Modulo) | $O(k)$ | $O(k)$ |
-| 27 | [Paths in Matrix Sum Divisible by K](./27_pathsInMatrixWhoseSumDivisibleByK) | Hard | DP (3D Memoization) | $O(mnk)$ | $O(mnk)$ |
-| 28 | [Max Subarray Sum Length Divisible by K](./28_maxSubarrSumWithLenDivByK) | Medium | Prefix Sums + Modulo | $O(n)$ | $O(k)$ |
-| 29 | [Valid Parentheses](./29_validParentheses) | Easy | Stack / Integer ID Sums | $O(n)$ | $O(n)$ |
+| 0 | [Sort Array By Parity](./solutions/0_sortArrayByParity) | Easy | Two Pointers (In-place) | $O(n)$ | $O(1)$ |
+| 1 | [Longest Palindrome Substring](./solutions/1_longestPalindromeSubstring) | Medium | Expand Around Center | $O(n^2)$ | $O(1)$ |
+| 2 | [Two Sum](./solutions/2_twoNumbersSum) | Easy | Hash Map | $O(n)$ | $O(n)$ |
+| 3 | [Add Two Numbers](./solutions/3_sumTwoNumsAsLists) | Medium | Linked List Traversal | $O(n)$ | $O(n)$ |
+| 4 | [Longest Substring No Repeats](./solutions/4_lengthOfLongestSubstringWithUniqeChars) | Medium | Sliding Window | $O(n)$ | $O(1)$ |
+| 5 | [Palindrome Number](./solutions/5_palindromeNumber) | Easy | Half-Number Reversal | $O(\log n)$ | $O(1)$ |
+| 6 | [Longest Common Prefix](./solutions/6_longestCommonPrefix) | Easy | Vertical Scanning | $O(S)$ | $O(1)$ |
+| 7 | [Halves Are Alike](./solutions/7_halvesAreAlike) | Easy | Counting | $O(n)$ | $O(1)$ |
+| 8 | [Zigzag Conversion](./solutions/8_zigzagConversion) | Medium | Mathematical Traversal | $O(n)$ | $O(n)$ |
+| 9 | [Median of Two Sorted Arrays](./solutions/9_medianOfTwoSortedArrays) | Hard | Binary Search Partitioning | $O(\log n)$ | $O(1)$ |
+| 10 | [Reverse Integer](./solutions/10_reverseInteger) | Medium | Modulo Arithmetic | $O(\log x)$ | $O(1)$ |
+| 11 | [String to Integer (atoi)](./solutions/11_atoi) | Medium | Deterministic Finite Automaton | $O(n)$ | $O(1)$ |
+| 12 | [Lowest Common Ancestor](./solutions/12_lowestCommonAncestor) | Medium | Recursive DFS | $O(n)$ | $O(h)$ |
+| 13 | [Substrings With Only 1s](./solutions/13_numberOfSubstringsWithOnly1s) | Medium | Arithmetic Progression | $O(n)$ | $O(1)$ |
+| 14 | [Regular Expression Matching](./solutions/14_regexMatching) | Hard | Dynamic Programming (Bottom-Up) | $O(nm)$ | $O(nm)$ |
+| 15 | [Check 1s Distance](./solutions/15_checkIfAll1sAreAtLeastKPlacesAway) | Easy | Linear Scan | $O(n)$ | $O(1)$ |
+| 16 | [1-bit and 2-bit Characters](./solutions/16_1bit2bitCharacters) | Easy | Linear Simulation | $O(n)$ | $O(1)$ |
+| 17 | [Keep Multiplying Found Values](./solutions/17_keepMultiplyingFoundValuesByTwo) | Easy | Hash Set / Linear Search | $O(n)$ | $O(n)$ |
+| 18 | [Container With Most Water](./solutions/18_containerWithMostWater) | Medium | Greedy Two Pointers | $O(n)$ | $O(1)$ |
+| 19 | [Set Intersection Size At Least Two](./solutions/19_setIntersectionSizeAtLeastTwo) | Hard | Greedy (Sorted Intervals) | $O(n \log n)$ | $O(1)$ |
+| 20 | [Unique Length 3 Palindromic Subsequences](./solutions/20_UniqueLen3PalindromicSubsequence) | Medium | Ranges + Bitmask | $O(n)$ | $O(1)$ |
+| 21 | [Minimum Operations To Make Divisible By 3](./solutions/21_minimumOperationsToMakeAllDivisibleBy3) | Easy | Linear Scan / Counting | $O(n)$ | $O(1)$ |
+| 22 | [Integer To Roman](./solutions/22_intToRoman) | Medium | Greedy Digit Processing | $O(1)$ | $O(1)$ |
+| 23 | [Greatest Sum Divisible by 3](./solutions/23_greatestSumDivisibleBy3) | Medium | Modular Arithmetic Tracking | $O(n)$ | $O(1)$ |
+| 24 | [Roman to Integer](./solutions/24_romanToInt) | Easy | Linear Scan with Lookahead | $O(n)$ | $O(1)$ |
+| 26 | [Smallest Integer Divisible by K](./solutions/26_smallestIntegerDivisibleByK) | Medium | Pigeonhole Principle (Modulo) | $O(k)$ | $O(k)$ |
+| 27 | [Paths in Matrix Sum Divisible by K](./solutions/27_pathsInMatrixWhoseSumDivisibleByK) | Hard | DP (3D Memoization) | $O(mnk)$ | $O(mnk)$ |
+| 28 | [Max Subarray Sum Length Divisible by K](./solutions/28_maxSubarrSumWithLenDivByK) | Medium | Prefix Sums + Modulo | $O(n)$ | $O(k)$ |
+| 29 | [Valid Parentheses](./solutions/29_validParentheses) | Easy | Stack / Integer ID Sums | $O(n)$ | $O(n)$ |
 
 
 ## Utility Framework
