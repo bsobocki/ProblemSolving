@@ -12,30 +12,32 @@ success_emoji= setGreen + "✓" + endColor
 fail_emoji= setRed + "✗" + endColor
 
 solutionDirRegex = "[0-9]+_.+"
+solutionsRootDir = "./solutions"
 
-def isSolutionDir(dir):
-    return path.isdir(dir) and re.match(solutionDirRegex, dir)
+def isSolutionDir(entry):
+    solutionDir = solutionsRootDir + "/" + entry
+    return path.isdir(solutionDir) and re.match(solutionDirRegex, entry)
 
-def isTestNumberOprion(opt):
+def isTestNumberOprton(opt):
     return re.match("--test=[0-9]+", opt)
 
-allSolutionDirs = list(filter(isSolutionDir, listdir()))
-solutionDirs = []
+allSolutionDirs = list(filter(isSolutionDir, listdir(solutionsRootDir)))
+solutionDirNames = []
 
 if len(sys.argv) > 1:
     arg = sys.argv[1]
 
-    if isTestNumberOprion(arg):
-        numSearch = re.search('\\d+', arg)
-        if numSearch:
-            num = int(numSearch.group())
-            solutionDirs = list(filter(lambda solDir: re.match(f'{num}_.*', solDir), allSolutionDirs))
+    if isTestNumberOprton(arg):
+        solutionNumSearchResult = re.search('\\d+', arg)
+        if solutionNumSearchResult:
+            num = int(solutionNumSearchResult.group())
+            solutionDirNames = list(filter(lambda solDir: re.match(f'{num}_.*', solDir), allSolutionDirs))
 
     elif isSolutionDir(arg):
-        solutionDirs = [arg]
+        solutionDirNames = [arg]
 
-if not solutionDirs:
-    solutionDirs = allSolutionDirs
+if not solutionDirNames:
+    solutionDirNames = allSolutionDirs
 
 print("Cleaning old files..")
 subprocess.run(['make', 'clean'])
@@ -43,10 +45,11 @@ print("")
 
 print("Solutions:")
 print("----------")
-print('\n'.join(solutionDirs))
+print('\n'.join(solutionDirNames))
 print("----------\n")
 
-for solutionDir in solutionDirs:
+for solutionDirName in solutionDirNames:
+    solutionDir = solutionsRootDir + "/" + solutionDirName
     try:
         print(f"Trying to call 'make compile {solutionDir}'..")
         subprocess.run(['make', 'compile', solutionDir], 
@@ -57,7 +60,8 @@ for solutionDir in solutionDirs:
     except subprocess.CalledProcessError as e:
         print(f"{fail_emoji} {solutionDir} failed: {e.stderr}\n")
 
-for solutionDir in solutionDirs:
+for solutionDirName in solutionDirNames:
+    solutionDir = solutionsRootDir + "/" + solutionDirName
     try:
         print(f"Trying to call 'make run {solutionDir}'..\n")
         result = subprocess.run(['make', 'run', solutionDir], 

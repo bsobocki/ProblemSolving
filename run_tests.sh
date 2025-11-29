@@ -1,10 +1,12 @@
 #!/bin/bash
 
 solution_dir_regex="^[0-9]+_.+"
+solutions_root_dir="./solutions"
 
 is_solution_dir() {
     local dir="$1"
-    [[ -d "$dir" ]] && [[ "$dir" =~ $solution_dir_regex ]]
+    local path="$solutions_root_dir/$dir"
+    [[ -d "$path" ]] && [[ "$dir" =~ $solution_dir_regex ]]
 }
 
 is_test_number_option() {
@@ -13,16 +15,16 @@ is_test_number_option() {
 }
 
 # Get all solution directories
-mapfile -t all_solution_dirs < <(
-    for dir in */; do
-        dir="${dir%/}"  # Remove trailing slash
+mapfile -t all_solution_dir_names < <(
+    for dir in solutions/*/; do
+        dir="$(basename "${dir%/}")"  # Get only dir name with removed trailing slash
         if is_solution_dir "$dir"; then
             echo "$dir"
         fi
     done
 )
 
-solution_dirs=()
+solution_dir_names=()
 
 if [[ $# -gt 0 ]]; then
     arg="$1"
@@ -30,19 +32,19 @@ if [[ $# -gt 0 ]]; then
     if is_test_number_option "$arg"; then
         # Extract number from --test=N
         num="${arg#--test=}"
-        for sol_dir in "${all_solution_dirs[@]}"; do
+        for sol_dir in "${all_solution_dir_names[@]}"; do
             if [[ "$sol_dir" =~ ^${num}_.* ]]; then
-                solution_dirs+=("$sol_dir")
+                solution_dir_names+=("$sol_dir")
             fi
         done
     elif is_solution_dir "$arg"; then
-        solution_dirs=("$arg")
+        solution_dir_names=("$arg")
     fi
 fi
 
 # If no solution dirs found, use all
-if [[ ${#solution_dirs[@]} -eq 0 ]]; then
-    solution_dirs=("${all_solution_dirs[@]}")
+if [[ ${#solution_dir_names[@]} -eq 0 ]]; then
+    solution_dir_names=("${all_solution_dir_names[@]}")
 fi
 
 echo "Cleaning old files.."
@@ -51,10 +53,11 @@ echo ""
 
 echo "Solutions:"
 echo "----------------------------------------------------------"
-printf '%s\n' "${solution_dirs[@]}"
+printf '%s\n' "${solution_dir_names[@]}"
 echo "----------------------------------------------------------"
 
-for solution_dir in "${solution_dirs[@]}"; do
+for solution_dir_name in "${solution_dir_names[@]}"; do
+    solution_dir=$solutions_root_dir/$solution_dir_name
     echo ""
     echo "---------------------------------------"
     echo "COMPILE $solution_dir..."
@@ -69,7 +72,8 @@ done
 echo ""
 echo ""
 
-for solution_dir in "${solution_dirs[@]}"; do
+for solution_dir in "${solution_dir_names[@]}"; do
+    solution_dir=$solutions_root_dir/$solution_dir
     echo ""
     echo "---------------------------------------"
     echo "RUN TESTS: $solution_dir..."
