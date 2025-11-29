@@ -39,6 +39,27 @@ I treat algorithmic problems as engineering challenges. Instead of writing one-o
 
 I also adhere to a "Documentation First" approach. Each problem includes a `description.md` detailing my thought process, trade-offs, and the evolution from an initial brute-force solution to the final optimized algorithm. Writing these documents helps clarify my thinking and serves as a knowledge base for future review.
 
+## Why Optimizations, Algorithms, and Data Structures Matter
+
+The best way to see how much better optimal solutions perform compared to naive (brute-force) solutions is to measure execution time.
+
+Below are the results for [Solution 18: Container With Most Water](./solutions/18_containerWithMostWater/):
+
+```text
+--- RANDOM TESTS ---
+
+1 Test Running: size=90015 | brute force: 24471.8ms | optimized: 0.44301ms
+2 Test Running: size=8192  | brute force: 214.196ms | optimized: 0.046399ms
+3 Test Running: size=62148 | brute force: 11951.8ms | optimized: 0.300065ms
+4 Test Running: size=42242 | brute force: 5469.88ms | optimized: 0.218348ms
+5 Test Running: size=94994 | brute force: 27155ms   | optimized: 0.489197ms
+...
+```
+
+As you can see, the difference between the $O(N^2)$ brute-force solution and the $O(N)$ optimal solution is **massive**.
+
+In test case #5, the brute force approach took **27 seconds**, while the optimized approach took only **0.49 milliseconds**. That makes the optimal solution approximately **55000 times faster**!
+
 ## Getting Started
 
 ### Prerequisites
