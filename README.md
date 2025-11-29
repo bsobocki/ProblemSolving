@@ -123,6 +123,7 @@ make run 14_regexMatching
 | 27 | [Paths in Matrix Sum Divisible by K](./solutions/27_pathsInMatrixWhoseSumDivisibleByK) | Hard | DP (3D Memoization) | $O(mnk)$ | $O(mnk)$ |
 | 28 | [Max Subarray Sum Length Divisible by K](./solutions/28_maxSubarrSumWithLenDivByK) | Medium | Prefix Sums + Modulo | $O(n)$ | $O(k)$ |
 | 29 | [Valid Parentheses](./solutions/29_validParentheses) | Easy | Stack / Integer ID Sums | $O(n)$ | $O(n)$ |
+| 30 | [Minimum Operations To Make Sum Divisible By K](./solutions/30_minOperationsToMakeSumDivK) | Easy | Sum mod k | $O(n)$ | $O(1)$ |
 
 
 ## Utility Framework
